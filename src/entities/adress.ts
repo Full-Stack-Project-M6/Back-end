@@ -6,6 +6,7 @@ import {
     ManyToOne,
     JoinTable,
   } from "typeorm";
+import { User } from "./user";
   
   
   @Entity("adress")

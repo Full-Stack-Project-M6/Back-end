@@ -27,7 +27,7 @@ import {
       cascade: true,
       onDelete: "CASCADE",
     })
-    announce: announce;
+    announce: Announce;
   
     }
   

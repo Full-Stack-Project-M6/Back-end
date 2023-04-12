@@ -9,9 +9,11 @@ import {
   OneToMany,
   JoinTable,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { Adress } from "./adress";
-
+import { Comment } from "./comment";
+import { Announce } from "./announce";
 @Entity("users")
 class User {
   @PrimaryGeneratedColumn("uuid")
@@ -41,12 +43,15 @@ class User {
   @Column({ length: 120 })
   password: string;
   
-  @OneToOne(() => Address)
+  @OneToOne(() => Adress)
   @JoinColumn()
-    address: Address;
+    address: Adress;
  
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
+
+  @OneToMany(() => Announce, (announce) => announce.user)
+  announce: Announce[];
 
   @BeforeInsert()
   @BeforeUpdate()
