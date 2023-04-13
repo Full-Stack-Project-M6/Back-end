@@ -17,7 +17,7 @@ import { Announce } from "./announce";
     id: string;
   
    @Column({ length: 50,})
-    color: string;
+    year: string;
    
    @OneToMany(() => Announce, (announces) => announces.year)
     announce: Announce[];
