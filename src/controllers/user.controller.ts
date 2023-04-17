@@ -1,9 +1,16 @@
 import { Request, Response } from "express";
-import { IUserRequest } from "../interfaces/user";
+import { IUserRequest, IUserUpdate } from "../interfaces/user";
 import createUserService from "../services/user/createUser.service";
+import { updateUserService } from "../services/user/updateUser.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData: IUserRequest = req.body;
   const newUser = await createUserService(userData);
   return res.status(201).json(newUser);
+};
+
+export const updateUserController = async (req: Request, res: Response) => {
+  const userData: IUserUpdate = req.body;
+  const data = await updateUserService(userData, req.user.id);
+  return res.status(200).send(data);
 };

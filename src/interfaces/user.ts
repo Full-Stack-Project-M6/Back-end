@@ -19,3 +19,15 @@ export interface IUserCreate {
   description?: string;
   account_type?: string;
 }
+export interface IUserUpdate {
+  name?: string;
+  email?: string;
+  cpf?: string;
+  cellphone?: string;
+  date_birth?: Date;
+  description?: string;
+}
+
+export interface IUserResponse {
+  id: string;
+}

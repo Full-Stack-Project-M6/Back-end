@@ -1,4 +1,4 @@
-import { IUserRequest, IUserCreate } from "../interfaces/user/index";
+import { IUserRequest, IUserCreate } from "../interfaces/user";
 import * as yup from "yup";
 
 export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
