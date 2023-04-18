@@ -31,3 +31,8 @@ export interface IUserUpdate {
 export interface IUserResponse {
   id: string;
 }
+
+export interface IUserLogin {
+  email: string;
+  password: string;
+}

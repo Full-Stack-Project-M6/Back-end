@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
-import { IUserRequest, IUserUpdate } from "../interfaces/user";
+import { IUserLogin, IUserRequest, IUserUpdate } from "../interfaces/user";
 import createUserService from "../services/user/createUser.service";
 import { updateUserService } from "../services/user/updateUser.service";
 import { deleteUserService } from "../services/user/deleteUser.service";
+import { loginService } from "../services/user/login.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData: IUserRequest = req.body;
   const newUser = await createUserService(userData);
   return res.status(201).json(newUser);
+};
+
+export const loginController = async (req: Request, res: Response) => {
+  const sessionData: IUserLogin = req.body;
+  const token = await loginService(sessionData);
+  return res.status(200).json(token);
 };
 
 export const updateUserController = async (req: Request, res: Response) => {
