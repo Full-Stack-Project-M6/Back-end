@@ -1,7 +1,7 @@
 export interface IImagemRequest{
-  Imagem1?:string;
-  Imagem2?:string;
-  Imagem3?:string
+  image1?:string;
+  image2?:string;
+  image3?:string
 
 }
 
@@ -19,7 +19,7 @@ export interface IAnnounceRequest {
     color_id:string;
     fuel_id:string;
     year_id:string;
-    image?:IImagemRequest
+    images?:IImagemRequest
   }
 
 export interface IAnnounceUpdate{

@@ -17,11 +17,11 @@ class Image {
   id: string;
 
   @Column({  })
-  Imagem1: string;
+  image1: string;
   @Column({  })
-  Imagem2: string;
+  image2: string;
   @Column({  })
-  Imagem3: string;
+  image3: string;
 
   @OneToOne(() => Announce, (announces) => announces.image)
   announce: Announce;
