@@ -17,7 +17,7 @@ export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
 export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
   .object()
   .shape({
-    id: yup.string().notRequired(),
+    id: yup.string().required(),
     name: yup.string().required(),
     email: yup.string().email().required(),
     cpf: yup.string().required(),

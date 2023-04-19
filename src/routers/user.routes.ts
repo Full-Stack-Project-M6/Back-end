@@ -7,6 +7,7 @@ import {
   updateUserController,
 } from "../controllers/user.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
+import { authIdMiddleware } from "../middleware/authId.middleware";
 
 export const userRoutes = Router();
 
@@ -16,6 +17,16 @@ userRoutes.post(
   createUserController
 );
 
-userRoutes.patch("/:id", inspectTokenMiddlewares, updateUserController);
+userRoutes.patch(
+  "/:id",
+  inspectTokenMiddlewares,
+  authIdMiddleware,
+  updateUserController
+);
 
-userRoutes.delete("/:id", inspectTokenMiddlewares, deleteUserController);
+userRoutes.delete(
+  "/:id",
+  inspectTokenMiddlewares,
+  authIdMiddleware,
+  deleteUserController
+);
