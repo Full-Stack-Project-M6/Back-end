@@ -4,6 +4,7 @@ import createUserService from "../services/user/createUser.service";
 import { updateUserService } from "../services/user/updateUser.service";
 import { deleteUserService } from "../services/user/deleteUser.service";
 import { loginService } from "../services/user/login.service";
+import { retrieveEspecificUserService } from "../services/user/retrieveEspecificUser.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData = req.body;
@@ -17,9 +18,18 @@ export const loginController = async (req: Request, res: Response) => {
   return res.status(200).json(token);
 };
 
+export const retrieveEspecificUserController = async (
+  req: Request,
+  res: Response
+) => {
+  const userId = req.params.id;
+  const user = await retrieveEspecificUserService(userId);
+  return res.status(200).json(user);
+};
+
 export const updateUserController = async (req: Request, res: Response) => {
   const userData: IUserUpdate = req.body;
-  const data = await updateUserService(userData, req.user.id);
+  const data = await updateUserService(userData, req.params.id);
   return res.status(200).send(data);
 };
 

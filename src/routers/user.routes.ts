@@ -4,6 +4,7 @@ import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 import {
   createUserController,
   deleteUserController,
+  retrieveEspecificUserController,
   updateUserController,
 } from "../controllers/user.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
@@ -15,6 +16,12 @@ userRoutes.post(
   "",
   ensureDataIsValidMiddleware(userSerializer),
   createUserController
+);
+
+userRoutes.get(
+  "/:id",
+  inspectTokenMiddlewares,
+  retrieveEspecificUserController
 );
 
 userRoutes.patch(
