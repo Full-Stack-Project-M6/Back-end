@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { userSerializer } from "../serializers/user.serializer";
 import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 import {
   createUserController,
@@ -9,12 +8,13 @@ import {
 } from "../controllers/user.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import { authIdMiddleware } from "../middleware/authId.middleware";
+import { userSerializer } from "../serializers/user.serializer";
 
 export const userRoutes = Router();
 
 userRoutes.post(
   "",
-  ensureDataIsValidMiddleware(userSerializer),
+  // ensureDataIsValidMiddleware(userSerializer),
   createUserController
 );
 
