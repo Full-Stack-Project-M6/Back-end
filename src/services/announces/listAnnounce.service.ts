@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
 
-const listAnnounceService = async (announceId) => {
+const listAnnounceService = async (announceId , userId:) => {
     const announceRepository: Repository<Announce> =
       AppDataSource.getRepository(Announce);
   

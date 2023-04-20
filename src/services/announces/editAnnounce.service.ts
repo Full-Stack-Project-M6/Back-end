@@ -5,13 +5,13 @@ import { IAnnounceResponce, IAnnounceUpdate } from "../../interfaces/announce";
 
 const updateAnnounceService = async (
   announceData: IAnnounceUpdate,
-  userToUpdateId: string
+  userId: string
 ): Promise<IAnnounceResponce> => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
 
   const announceFind: IAnnounceResponce = await announceRepository.findOne({
-    where: { id: userToUpdateId },
+    where: { id: userId },
   });
 
   const announce: IAnnounceResponce = await announceRepository.save({

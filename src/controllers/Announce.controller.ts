@@ -11,12 +11,12 @@ import createImageService from "../services/images/createImages.service";
 import listAnnounceService from "../services/announces/listAnnounce.service";
 
 const createAnnounceController = async (req: Request, res: Response) => {
-  const announce = await createAnnounceService(req.body);
+  const announce = await createAnnounceService(req.body , req.user);
   return res.status(201).json(announce);
 };
 
 const deleteAnnounceController = async (req: Request, res: Response) => {
-  await deleteAnonnouceService(req.params.id);
+  await deleteAnonnouceService(req.params.id, req.user);
   return res.status(204).json({});
 };
 
@@ -26,7 +26,7 @@ const updateAnnounceController = async (req: Request, res: Response) => {
 };
 
 const listAnnounceController = async (req: Request, res: Response) => {
-  const listContact = await listAnnounceService(req.params.id);
+  const listContact = await listAnnounceService(req.params.id , req.user);
   return res.status(200).json(listContact);
 };
 

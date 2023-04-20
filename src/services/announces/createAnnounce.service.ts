@@ -14,7 +14,7 @@ import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
 
-const createAnnounceService = async (body: IAnnounceRequest) => {
+const createAnnounceService = async (body: IAnnounceRequest, userId:) => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
 
