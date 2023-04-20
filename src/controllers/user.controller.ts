@@ -22,7 +22,7 @@ export const retrieveEspecificUserController = async (
   req: Request,
   res: Response
 ) => {
-  const userId = req.params.id;
+  const userId = req.user.id;
   const user = await retrieveEspecificUserService(userId);
   return res.status(200).json(user);
 };
