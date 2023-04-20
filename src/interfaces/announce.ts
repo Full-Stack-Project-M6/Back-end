@@ -1,3 +1,5 @@
+import { IUserResponse } from "./user";
+
 export interface IImagemRequest{
   image1?:string;
   image2?:string;
@@ -20,6 +22,7 @@ export interface IAnnounceRequest {
     fuel_id:string;
     year_id:string;
     images?:IImagemRequest
+    user_id:string;
   }
 
 export interface IAnnounceUpdate{
@@ -41,4 +44,5 @@ export interface IAnnounceResponce{
   image_cover:string;
   published:boolean;
   tag:boolean;
+  user:IUserResponse
 }  

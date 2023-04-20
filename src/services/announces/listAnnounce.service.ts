@@ -3,17 +3,17 @@ import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
 
-const listAnnounceService = async (announceId , userId:) => {
+const listEspecificAnnounceService = async (announceId ) => {
     const announceRepository: Repository<Announce> =
       AppDataSource.getRepository(Announce);
   
-      const listAnnounce: IAnnounceResponce = await announceRepository.findOneBy(
-        {
-          id: announceId,
+      const listAnnounce: IAnnounceResponce = await announceRepository.findOne(
+        { where:{id: announceId},
+          relations:{user:true}
         }
       );
   
     return listAnnounce;
   };
 
-export default listAnnounceService;
+export default listEspecificAnnounceService;

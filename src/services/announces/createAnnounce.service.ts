@@ -13,11 +13,16 @@ import { IColorResponce } from "../../interfaces/color";
 import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
+import { User } from "../../entities/user";
+import { IUserCreate, IUserResponse } from "../../interfaces/user";
+import AppError from "../../errors/AppError";
 
-const createAnnounceService = async (body: IAnnounceRequest, userId:) => {
+const createAnnounceService = async (body: IAnnounceRequest) => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
-
+  
+  const userRepository : Repository<User> = AppDataSource.getRepository(User); 
+  
   const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
 
   const fuelRepository: Repository<Fuel> = AppDataSource.getRepository(Fuel);
@@ -30,9 +35,14 @@ const createAnnounceService = async (body: IAnnounceRequest, userId:) => {
 
   const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
-  const { brand_id, fuel_id, color_id, year_id, model_id, images, ...rest } =
+  const { brand_id, fuel_id, color_id, year_id, model_id, images, user_id, ...rest } =
     body;
 
+  const getUser: IUserCreate = await userRepository.findOneBy({
+    id: user_id,
+  
+  });  
+  
   const getBrand: IBrandResponce = await brandRepository.findOneBy({
     id: brand_id,
   });
@@ -48,13 +58,17 @@ const createAnnounceService = async (body: IAnnounceRequest, userId:) => {
   const getModel: IModelResponce = await modelRepository.findOneBy({
     id: model_id,
   });
-  console.log(images);
+  
   const createImage: Image = imageRepository.create({
     ...images,
   });
-  console.log(createImage);
+  
   const saveImage = await imageRepository.save(createImage);
-  console.log(saveImage);
+
+  if(getUser.account_type == false){
+    throw new AppError("User not authorized",400)
+  }
+ 
   const createInstanceAnnounce = announceRepository.create({ ...rest });
 
   const newAnnounce: any = announceRepository.save({
@@ -65,6 +79,7 @@ const createAnnounceService = async (body: IAnnounceRequest, userId:) => {
     year: getYear,
     model: getModel,
     image: saveImage,
+    user:getUser,
   });
 
   return newAnnounce;

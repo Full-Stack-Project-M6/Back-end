@@ -12,8 +12,12 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { migrationsUser1681942201070 } from "./migrations/1681942201070-migrationsUser";
-import { Initial1681742408167 } from './migrations/1681742408167-initial';
+import { Initial1682000795888 } from "./migrations/1682000795888-Initial";
+
+
+
+
+
 
 
 const dataSourceConfig = (): DataSourceOptions => {
@@ -60,7 +64,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [migrationsUser1681942201070,Initial1681742408167],
+    migrations: [Initial1682000795888],
   };
 };
 

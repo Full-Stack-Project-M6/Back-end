@@ -27,7 +27,7 @@ class User {
   @Column({ length: 50, unique: true })
   email: string;
 
-  @Column({ length: 11, unique: true })
+  @Column({ length: 14, unique: true })
   cpf: string;
 
   @Column({ length: 15, unique: true })
@@ -39,8 +39,8 @@ class User {
   @Column({ length: 100 })
   description: string;
 
-  @Column({ length: 15, unique: true })
-  account_type: string;
+  @Column({ default:false})
+  account_type: boolean;
 
   @Column({ length: 120 })
   password: string;

@@ -7,15 +7,19 @@ import {
   createModalController,
   createYearController,
   deleteAnnounceController,
-  listAnnounceController,
+  listAnnounceALLController,
+  listEspecificAnnounceController,
   updateAnnounceController,
 } from "../controllers/Announce.controller";
+import { inspectTokenMiddlewares } from "../middleware/inspectToken";
+import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 
 const announceRoutes: Router = Router();
 
-announceRoutes.post("", createAnnounceController);
-announceRoutes.get("/:id", listAnnounceController);
-announceRoutes.delete("/:id", deleteAnnounceController);
+announceRoutes.post("",inspectTokenMiddlewares,createAnnounceController);
+announceRoutes.get("/:id",inspectTokenMiddlewares, listEspecificAnnounceController);
+announceRoutes.get("",inspectTokenMiddlewares, listAnnounceALLController);
+announceRoutes.delete("/:id",inspectTokenMiddlewares ,deleteAnnounceController);
 announceRoutes.post("/brand", createBrandController);
 announceRoutes.post("/color", createColorController);
 announceRoutes.post("/fuel", createFuelController);
@@ -23,7 +27,7 @@ announceRoutes.post("/model", createModalController);
 announceRoutes.post("/year", createYearController);
 
 announceRoutes.patch(
-  "/:id",
+  "/:id",inspectTokenMiddlewares,
 
   updateAnnounceController
 );

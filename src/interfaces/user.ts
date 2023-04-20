@@ -5,7 +5,7 @@ export interface IUserRequest {
   cellphone: string;
   date_birth: string;
   description: string;
-  account_type: string;
+  account_type: boolean;
   password: string;
 }
 
@@ -17,7 +17,7 @@ export interface IUserCreate {
   cellphone: string;
   date_birth: string;
   description: string;
-  account_type: string;
+  account_type: boolean;
 }
 
 export interface IUserLogin {
