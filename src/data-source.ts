@@ -13,6 +13,8 @@ import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
 import { migrationsUser1681942201070 } from "./migrations/1681942201070-migrationsUser";
+import { Initial1681742408167 } from './migrations/1681742408167-initial';
+
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -58,7 +60,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [migrationsUser1681942201070],
+    migrations: [migrationsUser1681942201070,Initial1681742408167],
   };
 };
 

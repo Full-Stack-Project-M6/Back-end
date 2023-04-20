@@ -1,14 +1,14 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class InitialMigration1681394511658 implements MigrationInterface {
-    name = 'InitialMigration1681394511658'
+export class Initial1681742408167 implements MigrationInterface {
+    name = 'Initial1681742408167'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "brands" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "brand" character varying(50) NOT NULL, CONSTRAINT "PK_b0c437120b624da1034a81fc561" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "colors" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "color" character varying(50) NOT NULL, CONSTRAINT "PK_3a62edc12d29307872ab1777ced" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "fuels" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "fuel" character varying(50) NOT NULL, CONSTRAINT "PK_4e8a7eac61d58da2fbb4b8743e1" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "years" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "year" character varying(50) NOT NULL, CONSTRAINT "PK_d6fe7de297533f142df4cb749ab" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "images" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "Imagem1" character varying NOT NULL, "Imagem2" character varying NOT NULL, "Imagem3" character varying NOT NULL, CONSTRAINT "PK_1fe148074c6a1a91b63cb9ee3c9" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "images" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "image1" character varying NOT NULL, "image2" character varying NOT NULL, "image3" character varying NOT NULL, CONSTRAINT "PK_1fe148074c6a1a91b63cb9ee3c9" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "model" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "model" character varying(50) NOT NULL, CONSTRAINT "PK_d6df271bba301d5cc79462912a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "announces" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "kilometer" character varying(50) NOT NULL, "price_FIPE" character varying(50) NOT NULL, "price" character varying(50) NOT NULL, "description" character varying(50) NOT NULL, "image_cover" character varying NOT NULL, "published" boolean NOT NULL DEFAULT true, "tag" boolean NOT NULL DEFAULT false, "userId" uuid, "brandId" uuid, "colorId" uuid, "yearId" uuid, "modelId" uuid, "fuelId" uuid, "imageId" uuid, CONSTRAINT "REL_8d1f89f22698c85df1fc2da054" UNIQUE ("imageId"), CONSTRAINT "PK_9d7389225221375f560773aa115" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "comments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "comment" character varying(200) NOT NULL, "userId" uuid, "announceId" uuid, CONSTRAINT "PK_8bf68bc960f2b69e818bdb90dcb" PRIMARY KEY ("id"))`);
