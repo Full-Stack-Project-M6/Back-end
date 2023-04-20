@@ -12,7 +12,7 @@ import listEspecificAnnounceService from "../services/announces/listAnnounce.ser
 import retrieveAnnouncesService from "../services/announces/listAllAnnounces.service";
 
 const createAnnounceController = async (req: Request, res: Response) => {
-  const announce = await createAnnounceService(req.body);
+  const announce = await createAnnounceService(req.body, req.user.id);
   return res.status(201).json(announce);
 };
 
@@ -32,12 +32,9 @@ const listEspecificAnnounceController = async (req: Request, res: Response) => {
 };
 
 const listAnnounceALLController = async (req: Request, res: Response) => {
-  
-  const listAnnounce = await retrieveAnnouncesService(req.params.id);
+  const listAnnounce = await retrieveAnnouncesService(req.params.user_id);
   return res.status(200).json(listAnnounce);
 };
-
-
 
 const createBrandController = async (req: Request, res: Response) => {
   const announce = await createBrandService(req.body);
@@ -80,5 +77,5 @@ export {
   createYearController,
   createImageController,
   listEspecificAnnounceController,
-  listAnnounceALLController
+  listAnnounceALLController,
 };

@@ -39,7 +39,7 @@ class User {
   @Column({ length: 100 })
   description: string;
 
-  @Column({ default:false})
+  @Column({ default: false })
   account_type: boolean;
 
   @Column({ length: 120 })
@@ -55,7 +55,7 @@ class User {
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 
-  @OneToMany(() => Announce, (announce) => announce.user)
+  @OneToMany(() => Announce, (announce) => announce.user, { eager: true })
   announce: Announce[];
 
   @BeforeInsert()

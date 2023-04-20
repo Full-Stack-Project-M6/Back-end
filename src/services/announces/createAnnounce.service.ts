@@ -17,12 +17,15 @@ import { User } from "../../entities/user";
 import { IUserCreate, IUserResponse } from "../../interfaces/user";
 import AppError from "../../errors/AppError";
 
-const createAnnounceService = async (body: IAnnounceRequest) => {
+const createAnnounceService = async (
+  body: IAnnounceRequest,
+  user_id: string
+) => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
-  
-  const userRepository : Repository<User> = AppDataSource.getRepository(User); 
-  
+
+  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
   const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
 
   const fuelRepository: Repository<Fuel> = AppDataSource.getRepository(Fuel);
@@ -35,14 +38,13 @@ const createAnnounceService = async (body: IAnnounceRequest) => {
 
   const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
-  const { brand_id, fuel_id, color_id, year_id, model_id, images, user_id, ...rest } =
+  const { brand_id, fuel_id, color_id, year_id, model_id, images, ...rest } =
     body;
 
   const getUser: IUserCreate = await userRepository.findOneBy({
     id: user_id,
-  
-  });  
-  
+  });
+
   const getBrand: IBrandResponce = await brandRepository.findOneBy({
     id: brand_id,
   });
@@ -58,17 +60,13 @@ const createAnnounceService = async (body: IAnnounceRequest) => {
   const getModel: IModelResponce = await modelRepository.findOneBy({
     id: model_id,
   });
-  
+
   const createImage: Image = imageRepository.create({
     ...images,
   });
-  
+
   const saveImage = await imageRepository.save(createImage);
 
-  if(getUser.account_type == false){
-    throw new AppError("User not authorized",400)
-  }
- 
   const createInstanceAnnounce = announceRepository.create({ ...rest });
 
   const newAnnounce: any = announceRepository.save({
@@ -79,7 +77,7 @@ const createAnnounceService = async (body: IAnnounceRequest) => {
     year: getYear,
     model: getModel,
     image: saveImage,
-    user:getUser,
+    user: getUser,
   });
 
   return newAnnounce;

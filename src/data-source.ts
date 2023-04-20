@@ -14,12 +14,6 @@ import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
 import { Initial1682000795888 } from "./migrations/1682000795888-Initial";
 
-
-
-
-
-
-
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
   console.log(dbUrl);

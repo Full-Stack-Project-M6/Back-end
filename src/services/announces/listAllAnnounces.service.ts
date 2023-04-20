@@ -4,17 +4,13 @@ import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
 import { User } from "../../entities/user";
 
-export const retrieveAnnouncesService = async (userId:string): Promise<Announce[]> => {
-  const announceRepository = AppDataSource.getRepository(Announce);
-  const allAnnounces = await announceRepository.find({
-    where:{id:userId},
-    relations:{
-      user:userId,
-      
-    }
-  });
-  
-  return allAnnounces;
+export const retrieveAnnouncesService = async (
+  userId: string
+): Promise<Announce[]> => {
+  const userRepository = AppDataSource.getRepository(User);
+  const userAnnounces = await userRepository.findOne({ where: { id: userId } });
+
+  return userAnnounces.announce;
 };
 
 export default retrieveAnnouncesService;
