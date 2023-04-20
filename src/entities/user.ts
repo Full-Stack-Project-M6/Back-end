@@ -10,10 +10,12 @@ import {
   JoinTable,
   OneToOne,
   JoinColumn,
+  DeleteDateColumn,
 } from "typeorm";
 import { Adress } from "./adress";
 import { Comment } from "./comment";
 import { Announce } from "./announce";
+
 @Entity("users")
 class User {
   @PrimaryGeneratedColumn("uuid")
@@ -30,11 +32,11 @@ class User {
 
   @Column({ length: 15, unique: true })
   cellphone: string;
-  
-  @CreateDateColumn()
-  date_birth: Date;
 
-  @Column({ length: 100})
+  @Column({ length: 10, nullable: false })
+  date_birth: string;
+
+  @Column({ length: 100 })
   description: string;
 
   @Column({ length: 15, unique: true })
@@ -42,11 +44,14 @@ class User {
 
   @Column({ length: 120 })
   password: string;
-  
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
+
   @OneToOne(() => Adress)
   @JoinColumn()
-    address: Adress;
- 
+  address: Adress;
+
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 
