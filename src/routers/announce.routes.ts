@@ -7,6 +7,7 @@ import {
   createModalController,
   createYearController,
   deleteAnnounceController,
+  listAllUsersAnnoncesController,
   listAnnounceALLController,
   listEspecificAnnounceController,
   updateAnnounceController,
@@ -22,16 +23,23 @@ announceRoutes.get(
   inspectTokenMiddlewares,
   listEspecificAnnounceController
 );
+
 announceRoutes.get(
   "/all/:user_id",
-  inspectTokenMiddlewares,
   listAnnounceALLController
 );
+
+announceRoutes.get(
+  "/all",
+  listAllUsersAnnoncesController
+);
+
 announceRoutes.delete(
   "/:id",
   inspectTokenMiddlewares,
   deleteAnnounceController
 );
+
 announceRoutes.post("/brand", createBrandController);
 announceRoutes.post("/color", createColorController);
 announceRoutes.post("/fuel", createFuelController);
