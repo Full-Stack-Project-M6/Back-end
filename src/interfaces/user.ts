@@ -1,3 +1,5 @@
+import { IAnnounceResponce } from "./announce";
+
 export interface IUserRequest {
   name: string;
   email: string;
@@ -37,4 +39,16 @@ export interface IUserUpdate {
 
 export interface IUserResponse {
   id: string;
+}
+
+export interface IUserResponseWithoutPassword {
+  id: string;
+  name: string;
+  email: string;
+  cpf: string;
+  cellphone: string;
+  date_birth: string;
+  description: string;
+  account_type: boolean;
+  announce: IAnnounceResponce[];
 }
