@@ -37,12 +37,10 @@ const listAnnounceALLController = async (req: Request, res: Response) => {
   return res.status(200).json(listAnnounce);
 };
 
-const listAllUsersAnnoncesController = async (res: Response) => {
+const listAllUsersAnnoncesController = async (req: Request, res: Response) => {
   const listAnnounce = await retrieveAllAnnouncesService();
   return res.status(200).json(listAnnounce);
 };
-
-
 
 const createBrandController = async (req: Request, res: Response) => {
   const announce = await createBrandService(req.body);
@@ -86,5 +84,5 @@ export {
   createImageController,
   listEspecificAnnounceController,
   listAnnounceALLController,
-  listAllUsersAnnoncesController
+  listAllUsersAnnoncesController,
 };
