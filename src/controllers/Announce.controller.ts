@@ -8,15 +8,16 @@ import createFuelService from "../services/fuel/createFuel.service";
 import createModelService from "../services/model/createModel.service";
 import createYearService from "../services/year/createYear.service";
 import createImageService from "../services/images/createImages.service";
-import listAnnounceService from "../services/announces/listAnnounce.service";
+import listEspecificAnnounceService from "../services/announces/listAnnounce.service";
+import retrieveAnnouncesService from "../services/announces/listAllAnnounces.service";
 
 const createAnnounceController = async (req: Request, res: Response) => {
-  const announce = await createAnnounceService(req.body , req.user);
+  const announce = await createAnnounceService(req.body, req.user.id);
   return res.status(201).json(announce);
 };
 
 const deleteAnnounceController = async (req: Request, res: Response) => {
-  await deleteAnonnouceService(req.params.id, req.user);
+  await deleteAnonnouceService(req.params.id);
   return res.status(204).json({});
 };
 
@@ -25,9 +26,14 @@ const updateAnnounceController = async (req: Request, res: Response) => {
   return res.json(announce);
 };
 
-const listAnnounceController = async (req: Request, res: Response) => {
-  const listContact = await listAnnounceService(req.params.id , req.user);
-  return res.status(200).json(listContact);
+const listEspecificAnnounceController = async (req: Request, res: Response) => {
+  const listAnnounce = await listEspecificAnnounceService(req.params.id);
+  return res.status(200).json(listAnnounce);
+};
+
+const listAnnounceALLController = async (req: Request, res: Response) => {
+  const listAnnounce = await retrieveAnnouncesService(req.params.user_id);
+  return res.status(200).json(listAnnounce);
 };
 
 const createBrandController = async (req: Request, res: Response) => {
@@ -70,5 +76,6 @@ export {
   createModalController,
   createYearController,
   createImageController,
-  listAnnounceController,
+  listEspecificAnnounceController,
+  listAnnounceALLController,
 };

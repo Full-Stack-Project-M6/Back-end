@@ -23,7 +23,7 @@ export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
       )
       .required("Data de nascimento é obrigatória"),
     description: yup.string().required(),
-    account_type: yup.string().required(),
+    account_type: yup.boolean().required(),
     password: yup.string().required(),
   });
 
@@ -37,7 +37,7 @@ export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
     cellphone: yup.string().required(),
     date_birth: yup.string().required(),
     description: yup.string().required(),
-    account_type: yup.string().required(),
+    account_type: yup.boolean().required(),
     password: yup.string().required(),
   });
 export const allUsersWithoutPassword = yup.array(userWithoutPasswordSerializer);
