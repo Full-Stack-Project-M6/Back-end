@@ -17,6 +17,7 @@ import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 const announceRoutes: Router = Router();
 
 announceRoutes.post("", inspectTokenMiddlewares, createAnnounceController);
+announceRoutes.get("", ListAllAnnounceController);
 announceRoutes.get(
   "/:id",
   inspectTokenMiddlewares,

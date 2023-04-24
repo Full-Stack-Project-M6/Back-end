@@ -12,7 +12,7 @@ const deleteAnonnouceService = async (announceId: string): Promise<void> => {
       id: announceId,
     }
   );
-  console.log(deletedAnnounce);
+
 
   await announceRepository.delete(deletedAnnounce);
 };
