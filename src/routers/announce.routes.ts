@@ -7,6 +7,7 @@ import {
   createModalController,
   createYearController,
   deleteAnnounceController,
+  listAllAnnounceController,
   listAnnounceALLController,
   listEspecificAnnounceController,
   updateAnnounceController,
@@ -17,7 +18,7 @@ import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 const announceRoutes: Router = Router();
 
 announceRoutes.post("", inspectTokenMiddlewares, createAnnounceController);
-announceRoutes.get("", ListAllAnnounceController);
+announceRoutes.get("", listAllAnnounceController);
 announceRoutes.get(
   "/:id",
   inspectTokenMiddlewares,
