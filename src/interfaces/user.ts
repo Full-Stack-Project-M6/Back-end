@@ -11,7 +11,7 @@ export interface IUserRequest {
   password: string;
 }
 
-export interface IUserCreate {
+export interface IUserReturn {
   id: string;
   name: string;
   email: string;

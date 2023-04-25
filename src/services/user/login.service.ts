@@ -6,24 +6,18 @@ import { User } from "../../entities/user";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 
-export const loginService = async ({
-  email,
-  password,
-}: IUserLogin): Promise<{
-  token: string;
-  user: User;
-}> => {
+export const loginService = async (userData: IUserLogin) => {
   const userRepo = AppDataSource.getRepository(User);
 
   const user = await userRepo.findOneBy({
-    email: email,
+    email: userData.email,
   });
 
   if (!user) {
     throw new AppError("Email or password invalid", 401);
   }
 
-  const passMatch = await compare(password, user.password);
+  const passMatch = await compare(userData.password, user.password);
 
   if (!passMatch) {
     throw new AppError("Email or password invalid", 401);
@@ -39,5 +33,5 @@ export const loginService = async ({
       expiresIn: "24h",
     }
   );
-  return { token, user };
+  return token;
 };

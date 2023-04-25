@@ -29,6 +29,7 @@ class Announce {
   comments: Comment[];
 
   @ManyToOne(() => User, (user) => user.announce, {
+    eager: true,
     cascade: true,
     onDelete: "CASCADE",
   })

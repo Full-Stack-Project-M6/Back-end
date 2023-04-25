@@ -14,8 +14,9 @@ import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
 import { User } from "../../entities/user";
-import { IUserCreate, IUserResponse } from "../../interfaces/user";
+import { IUserReturn, IUserResponse } from "../../interfaces/user";
 import AppError from "../../errors/AppError";
+import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 const createAnnounceService = async (
   body: IAnnounceRequest,
@@ -24,7 +25,7 @@ const createAnnounceService = async (
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
 
-  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+  const userRepository = AppDataSource.getRepository(User);
 
   const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
 
@@ -41,9 +42,16 @@ const createAnnounceService = async (
   const { brand_id, fuel_id, color_id, year_id, model_id, images, ...rest } =
     body;
 
-  const getUser: IUserCreate = await userRepository.findOneBy({
+  const getUser: IUserReturn = await userRepository.findOneBy({
     id: user_id,
   });
+
+  const userWithoutPassword = await userWithoutPasswordSerializer.validate(
+    getUser,
+    {
+      stripUnknown: true,
+    }
+  );
 
   const getBrand: IBrandResponce = await brandRepository.findOneBy({
     id: brand_id,
@@ -77,7 +85,7 @@ const createAnnounceService = async (
     year: getYear,
     model: getModel,
     image: saveImage,
-    user: getUser,
+    user: userWithoutPassword,
   });
 
   return newAnnounce;

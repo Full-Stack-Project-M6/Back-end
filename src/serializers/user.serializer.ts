@@ -1,4 +1,4 @@
-import { IUserRequest, IUserCreate } from "../interfaces/user";
+import { IUserRequest, IUserReturn } from "../interfaces/user";
 import * as yup from "yup";
 
 export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
@@ -26,7 +26,7 @@ export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
     password: yup.string().required(),
   });
 
-export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
+export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserReturn> = yup
   .object()
   .shape({
     id: yup.string().required(),

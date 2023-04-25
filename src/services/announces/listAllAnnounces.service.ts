@@ -8,7 +8,10 @@ export const retrieveAnnouncesService = async (
   userId: string
 ): Promise<Announce[]> => {
   const userRepository = AppDataSource.getRepository(User);
-  const userAnnounces = await userRepository.findOne({ where: { id: userId } });
+  const userAnnounces = await userRepository.findOne({
+    where: { id: userId },
+    relations: { announce: true },
+  });
 
   return userAnnounces.announce;
 };
