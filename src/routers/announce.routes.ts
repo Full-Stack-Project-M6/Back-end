@@ -24,15 +24,9 @@ announceRoutes.get(
   listEspecificAnnounceController
 );
 
-announceRoutes.get(
-  "/all/:user_id",
-  listAnnounceALLController
-);
+announceRoutes.get("/all/:user_id", listAnnounceALLController);
 
-announceRoutes.get(
-  "/all",
-  listAllUsersAnnoncesController
-);
+announceRoutes.get("", listAllUsersAnnoncesController);
 
 announceRoutes.delete(
   "/:id",
