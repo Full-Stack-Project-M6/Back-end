@@ -10,6 +10,7 @@ import createYearService from "../services/year/createYear.service";
 import createImageService from "../services/images/createImages.service";
 import listEspecificAnnounceService from "../services/announces/listAnnounce.service";
 import retrieveAnnouncesService from "../services/announces/listAllAnnounces.service";
+import retrieveAllAnnouncesService from "../services/announces/listAllUsersAnnounce.service";
 
 const createAnnounceController = async (req: Request, res: Response) => {
   const announce = await createAnnounceService(req.body, req.user.id);
@@ -33,6 +34,11 @@ const listEspecificAnnounceController = async (req: Request, res: Response) => {
 
 const listAnnounceALLController = async (req: Request, res: Response) => {
   const listAnnounce = await retrieveAnnouncesService(req.params.user_id);
+  return res.status(200).json(listAnnounce);
+};
+
+const listAllUsersAnnoncesController = async (req: Request, res: Response) => {
+  const listAnnounce = await retrieveAllAnnouncesService();
   return res.status(200).json(listAnnounce);
 };
 
@@ -78,4 +84,5 @@ export {
   createImageController,
   listEspecificAnnounceController,
   listAnnounceALLController,
+  listAllUsersAnnoncesController,
 };
