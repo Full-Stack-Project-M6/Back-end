@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { compare } from "bcryptjs";
-
 import "dotenv/config";
 import { IUserLogin } from "../../interfaces/user";
 import { User } from "../../entities/user";

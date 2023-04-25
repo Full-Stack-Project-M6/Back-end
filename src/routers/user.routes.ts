@@ -14,7 +14,7 @@ export const userRoutes = Router();
 
 userRoutes.post(
   "",
-  // ensureDataIsValidMiddleware(userSerializer),
+  ensureDataIsValidMiddleware(userSerializer),
   createUserController
 );
 
