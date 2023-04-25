@@ -45,6 +45,9 @@ class User {
   @Column({ length: 120 })
   password: string;
 
+  @Column({ nullable: true, default: true })
+  isActive: boolean;
+
   @DeleteDateColumn()
   deletedAt?: Date;
 

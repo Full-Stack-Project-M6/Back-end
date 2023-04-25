@@ -19,6 +19,7 @@ import { Year } from "./year";
 import { Image } from "./images";
 import { Model } from "./model";
 import { join } from "path";
+
 @Entity("announces")
 class Announce {
   @PrimaryGeneratedColumn("uuid")
@@ -78,10 +79,10 @@ class Announce {
   @Column()
   image_cover: string;
 
-  @Column({default:true})
+  @Column({ default: true })
   published: boolean;
-  
-  @Column({default:false})
+
+  @Column({ default: false })
   tag: boolean;
 
   @OneToOne(() => Image, (image) => image.announce)

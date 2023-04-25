@@ -12,7 +12,7 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { Initial1682000795888 } from "./migrations/1682000795888-Initial";
+import { editEntityUser1682426992287 } from "./migrations/1682426992287-editEntityUser";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -58,7 +58,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [Initial1682000795888],
+    migrations: [editEntityUser1682426992287],
   };
 };
 

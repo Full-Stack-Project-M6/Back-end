@@ -29,6 +29,7 @@ export const inspectTokenMiddlewares = async (
 
       request.user = {
         id: decoded.sub,
+        isActive: decoded.isActive,
       };
 
       return next();
