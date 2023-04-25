@@ -3,6 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
 import { User } from "../../entities/user";
+import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 export const retrieveAnnouncesService = async (
   userId: string
