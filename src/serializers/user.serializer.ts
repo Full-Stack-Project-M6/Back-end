@@ -37,6 +37,5 @@ export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
     date_birth: yup.string().required(),
     description: yup.string().required(),
     account_type: yup.boolean().required(),
-    password: yup.string().required(),
   });
 export const allUsersWithoutPassword = yup.array(userWithoutPasswordSerializer);
