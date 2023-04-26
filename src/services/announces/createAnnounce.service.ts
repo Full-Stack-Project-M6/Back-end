@@ -38,29 +38,78 @@ const createAnnounceService = async (
 
   const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
-  const { brand_id, fuel_id, color_id, year_id, model_id, images, ...rest } =
+  const { brand, fuel, color, year, model, images, ...rest } =
     body;
 
   const getUser: IUserCreate = await userRepository.findOneBy({
     id: user_id,
   });
+   
+  let getBrand: IBrandResponce = await brandRepository.findOneBy({
+    brand: brand,
+  });
+   
+  if(!getBrand){
+    const newBrand: Brand = brandRepository.create({
+      brand,
+    });
+     await brandRepository.save(newBrand);
+     getBrand = newBrand
+  }
 
-  const getBrand: IBrandResponce = await brandRepository.findOneBy({
-    id: brand_id,
+  let getFuel: IFuelResponce = await fuelRepository.findOneBy({
+    fuel: fuel,
   });
-  const getFuel: IFuelResponce = await fuelRepository.findOneBy({
-    id: fuel_id,
-  });
-  const getColor: IColorResponce = await colorRepository.findOneBy({
-    id: color_id,
-  });
-  const getYear: IYearResponce = await yearRepository.findOneBy({
-    id: year_id,
-  });
-  const getModel: IModelResponce = await modelRepository.findOneBy({
-    id: model_id,
+   
+  if(!getFuel){
+    const newFuel: Fuel = fuelRepository.create({
+      fuel,
+    });
+     await fuelRepository.save(newFuel);
+     getFuel = newFuel
+  }
+ 
+
+
+  let getColor: IColorResponce = await colorRepository.findOneBy({
+    color: color,
   });
 
+  if(!getColor){
+    const newColor: Color = colorRepository.create({
+      color,
+    });
+     await colorRepository.save(newColor);
+     getColor = newColor
+  }
+
+
+
+  let getYear: IYearResponce = await yearRepository.findOneBy({
+    year: year,
+  });
+   
+  if(!getYear){
+    const newYear: Year = yearRepository.create({
+      year,
+    });
+     await yearRepository.save(newYear);
+     getYear = newYear
+  }
+
+  let getModel: IModelResponce = await modelRepository.findOneBy({
+    model: model,
+  });
+
+  if(!getModel){
+    const newModel: Model = modelRepository.create({
+      model,
+    });
+     await modelRepository.save(newModel);
+     getModel = newModel
+  }
+
+  
   const createImage: Image = imageRepository.create({
     ...images,
   });

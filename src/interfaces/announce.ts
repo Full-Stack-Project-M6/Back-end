@@ -16,11 +16,11 @@ export interface IAnnounceRequest {
     image_cover:string;
     published:boolean;
     tag:boolean;
-    brand_id:string;
-    model_id:string;
-    color_id:string;
-    fuel_id:string;
-    year_id:string;
+    brand:string;
+    model:string;
+    color:string;
+    fuel:string;
+    year:string;
     images?:IImagemRequest
     user_id:string;
   }
