@@ -14,6 +14,7 @@ import retrieveAllAnnouncesService from "../services/announces/listAllUsersAnnou
 
 const createAnnounceController = async (req: Request, res: Response) => {
   const announce = await createAnnounceService(req.body, req.user.id);
+  console.log(announce);
   return res.status(201).json(announce);
 };
 

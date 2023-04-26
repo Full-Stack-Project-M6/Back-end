@@ -5,15 +5,6 @@ import {
 } from "../interfaces/announce";
 import { IBrandResponce } from "../interfaces/brand";
 
-interface IPneu {
-  id: string;
-  brand: string;
-}
-
-const brandSerializer: yup.ObjectSchema<IPneu> = yup
-  .object()
-  .shape({ id: yup.string().required(), brand: yup.string().required() });
-
 export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
   id: yup.string().required(),
   kilometer: yup.string().required(),
@@ -23,7 +14,10 @@ export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
   image_cover: yup.string().required(),
   published: yup.boolean().required(),
   tag: yup.boolean().required(),
-  brand: brandSerializer,
+  brand: yup.object().shape({
+    id: yup.string().required(),
+    brand: yup.string().required(),
+  }),
   fuel: yup.object().shape({
     id: yup.string().required(),
     fuel: yup.string().required(),

@@ -77,7 +77,7 @@ const createAnnounceService = async (
 
   const createInstanceAnnounce = announceRepository.create({ ...rest });
 
-  const newAnnounce: any = announceRepository.save({
+  const newAnnounce: any = await announceRepository.save({
     ...createInstanceAnnounce,
     brand: getBrand,
     fuel: getFuel,
@@ -90,5 +90,4 @@ const createAnnounceService = async (
 
   return newAnnounce;
 };
-
 export default createAnnounceService;

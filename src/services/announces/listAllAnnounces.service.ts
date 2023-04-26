@@ -7,14 +7,28 @@ import { userWithoutPasswordSerializer } from "../../serializers/user.serializer
 
 export const retrieveAnnouncesService = async (
   userId: string
-): Promise<Announce[]> => {
+): Promise<any> => {
   const userRepository = AppDataSource.getRepository(User);
   const userAnnounces = await userRepository.findOne({
+    select: {
+      id: true,
+      name: true,
+      cellphone: true,
+      email: true,
+    },
     where: { id: userId },
-    relations: { announce: true },
+    relations: {
+      announce: {
+        brand: true,
+        color: true,
+        fuel: true,
+        image: true,
+        model: true,
+        year: true,
+      },
+    },
   });
-
-  return userAnnounces.announce;
+  return userAnnounces;
 };
 
 export default retrieveAnnouncesService;
