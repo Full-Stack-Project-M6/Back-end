@@ -1,7 +1,7 @@
 import { IUserRequest, IUserCreate } from "../interfaces/user";
 import * as yup from "yup";
 
-export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
+export const userSerializer: yup.ObjectSchema<IUserRequest, yup.AnyObject, any, ""> = yup
   .object()
   .shape({
     name: yup.string().required(),
@@ -24,8 +24,19 @@ export const userSerializer: yup.ObjectSchema<IUserRequest> = yup
     description: yup.string().required(),
     account_type: yup.boolean().required(),
     password: yup.string().required(),
+    adress:yup.object().shape({
+      cep:yup.string().required(),
+      estate:yup.string().required(),
+      city:yup.string().required(),
+      street:yup.string().required(),
+      number:yup.string().required(),
+      complement:yup.string().required()
+    })
   });
 
+
+
+  
 export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
   .object()
   .shape({
@@ -38,5 +49,6 @@ export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserCreate> = yup
     description: yup.string().required(),
     account_type: yup.boolean().required(),
     password: yup.string().required(),
+    
   });
 export const allUsersWithoutPassword = yup.array(userWithoutPasswordSerializer);
