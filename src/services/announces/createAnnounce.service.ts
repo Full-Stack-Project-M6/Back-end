@@ -41,7 +41,7 @@ const createAnnounceService = async (
 
   const { brand, fuel, color, year, model, images, ...rest } = body;
 
-  const getUser: IUserReturn = await userRepository.findOneBy({
+  const getUser = await userRepository.findOneBy({
     id: user_id,
   });
 
