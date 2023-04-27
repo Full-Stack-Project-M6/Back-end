@@ -5,6 +5,8 @@ import { updateUserService } from "../services/user/updateUser.service";
 import { deleteUserService } from "../services/user/deleteUser.service";
 import { loginService } from "../services/user/login.service";
 import { retrieveEspecificUserService } from "../services/user/retrieveEspecificUser.service";
+import { retrieveUserByEmailService } from "../services/user/retrieveUserByEmail.service";
+import { updateUserPasswordService } from "../services/user/updateUserPassword.service";
 
 export const createUserController = async (req: Request, res: Response) => {
   const userData = req.body;
@@ -27,12 +29,25 @@ export const retrieveEspecificUserController = async (
   return res.status(200).json(user);
 };
 
+export const retrieveUserByEmailController = async (
+  req: Request,
+  res: Response
+) => {
+  const userEmail = req.params.email;
+  const user = await retrieveUserByEmailService(userEmail);
+  return res.status(200).json(user);
+};
+
 export const updateUserController = async (req: Request, res: Response) => {
   const userData: IUserUpdate = req.body;
   const data = await updateUserService(userData, req.params.id);
   return res.status(200).send(data);
 };
-
+export const updateUserPasswordController = async (req: Request, res: Response) => {
+  const userData: IUserUpdate = req.body;
+  const data = await updateUserPasswordService(userData, req.params.id);
+  return res.status(200).send(data);
+};
 export const deleteUserController = async (req: Request, res: Response) => {
   await deleteUserService(req.params.id);
   return res.status(204).json();
