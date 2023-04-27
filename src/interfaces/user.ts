@@ -1,4 +1,5 @@
 import { IAnnounceResponce } from "./announce";
+import { IAdressRequest } from "./adress";
 
 export interface IUserRequest {
   name: string;
@@ -9,6 +10,7 @@ export interface IUserRequest {
   description: string;
   account_type: boolean;
   password: string;
+  adress?: IAdressRequest;
 }
 
 export interface IUserReturn {
@@ -20,6 +22,7 @@ export interface IUserReturn {
   date_birth: string;
   description: string;
   account_type: boolean;
+  // adress:string
 }
 
 export interface IUserLogin {
@@ -35,6 +38,7 @@ export interface IUserUpdate {
   date_birth?: string;
   description?: string;
   password?: string;
+  adress?: IAdressRequest;
 }
 
 export interface IUserResponse {
