@@ -3,31 +3,30 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user";
 import AppError from "../../errors/AppError";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
-import { Adress } from "../../entities/adress";
-import { IAdressResponce } from "../../interfaces/adress";
+import { Address } from "../../entities/address";
+import { Repository } from "typeorm";
 
 const createUserService = async (userData: IUserRequest) => {
-  const { email } = userData;
   const userRep = AppDataSource.getRepository(User);
-  const adressRep = AppDataSource.getRepository(Adress);
-  const emailUser = await userRep.findOneBy({ email: email });
+  const addressRep: Repository<Address> = AppDataSource.getRepository(Address);
+  const emailUser = await userRep.findOneBy({ email: userData.email });
 
   if (emailUser) {
     throw new AppError("Email as already registered", 400);
   }
 
-  const { adress, ...rest } = userData;
+  const { address, ...rest } = userData;
 
-  const createAdress: Adress = adressRep.create({
-    ...adress,
+  const createaddress: Address = addressRep.create({
+    ...address,
   });
-  const saveAdress = await adressRep.save(createAdress);
+  const saveaddress = await addressRep.save(createaddress);
 
   const createInstanceUser = userRep.create({ ...rest });
 
-  const newUser: any = userRep.save({
+  const newUser = await userRep.save({
     ...createInstanceUser,
-    address: saveAdress,
+    address: saveaddress,
   });
 
   const userWithoutPassword = await userWithoutPasswordSerializer.validate(

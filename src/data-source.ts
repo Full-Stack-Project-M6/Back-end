@@ -2,7 +2,7 @@ import "dotenv/config";
 import "reflect-metadata";
 import path from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
-import { Adress } from "./entities/adress";
+import { Address } from "./entities/address";
 import { Announce } from "./entities/announce";
 import { Brand } from "./entities/brand";
 import { Color } from "./entities/color";
@@ -12,7 +12,7 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { editEntityUser1682426992287 } from "./migrations/1682426992287-editEntityUser";
+import { initial1682605296599 } from "./migrations/1682605296599-initial";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -27,7 +27,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       database: ":memory:",
       synchronize: true,
       entities: [
-        Adress,
+        Address,
         Announce,
         Brand,
         Color,
@@ -45,9 +45,9 @@ const dataSourceConfig = (): DataSourceOptions => {
     type: "postgres",
     url: dbUrl,
     synchronize: false,
-    logging: false,
+    logging: true,
     entities: [
-      Adress,
+      Address,
       Announce,
       Brand,
       Color,
@@ -58,7 +58,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [editEntityUser1682426992287],
+    migrations: [initial1682605296599],
   };
 };
 

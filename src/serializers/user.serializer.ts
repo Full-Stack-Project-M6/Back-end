@@ -1,12 +1,8 @@
+import { IaddressResponce } from "../interfaces/address";
 import { IUserRequest, IUserReturn } from "../interfaces/user";
 import * as yup from "yup";
 
-export const userSerializer: yup.ObjectSchema<
-  IUserRequest,
-  yup.AnyObject,
-  any,
-  ""
-> = yup.object().shape({
+export const userSerializer: yup.ObjectSchema<any> = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
   cpf: yup
@@ -27,17 +23,17 @@ export const userSerializer: yup.ObjectSchema<
   description: yup.string().required(),
   account_type: yup.boolean().required(),
   password: yup.string().required(),
-  adress: yup.object().shape({
+  address: yup.object().shape({
     cep: yup.string().required(),
     estate: yup.string().required(),
     city: yup.string().required(),
     street: yup.string().required(),
     number: yup.string().required(),
-    complement: yup.string().required(),
+    complement: yup.string().notRequired(),
   }),
 });
 
-export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserReturn> = yup
+export const userWithoutPasswordSerializer: yup.ObjectSchema<any> = yup
   .object()
   .shape({
     id: yup.string().required(),
@@ -48,5 +44,14 @@ export const userWithoutPasswordSerializer: yup.ObjectSchema<IUserReturn> = yup
     date_birth: yup.string().required(),
     description: yup.string().required(),
     account_type: yup.boolean().required(),
+    address: yup.object().shape({
+      id: yup.string().required(),
+      cep: yup.string().required(),
+      estate: yup.string().required(),
+      city: yup.string().required(),
+      street: yup.string().required(),
+      number: yup.string().required(),
+      complement: yup.string().notRequired(),
+    }),
   });
 export const allUsersWithoutPassword = yup.array(userWithoutPasswordSerializer);

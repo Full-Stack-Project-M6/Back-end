@@ -11,8 +11,9 @@ import {
   OneToOne,
   JoinColumn,
   DeleteDateColumn,
+  ManyToOne,
 } from "typeorm";
-import { Adress } from "./adress";
+import { Address } from "./address";
 import { Comment } from "./comment";
 import { Announce } from "./announce";
 
@@ -51,9 +52,9 @@ class User {
   @DeleteDateColumn()
   deletedAt?: Date;
 
-  @OneToOne(() => Adress)
+  @ManyToOne(() => Address, (address) => address.user)
   @JoinColumn()
-  address: Adress;
+  address: Address;
 
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
