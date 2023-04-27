@@ -38,7 +38,6 @@ export interface IUserUpdate {
   date_birth?: string;
   description?: string;
   password?: string;
-  address?: IaddressRequest;
 }
 
 export interface IUserResponse {

@@ -12,7 +12,7 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { initial1682605296599 } from "./migrations/1682605296599-initial";
+import { initial1682615732678 } from "./migrations/1682615732678-initial";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -45,7 +45,7 @@ const dataSourceConfig = (): DataSourceOptions => {
     type: "postgres",
     url: dbUrl,
     synchronize: false,
-    logging: true,
+    logging: false,
     entities: [
       Address,
       Announce,
@@ -58,7 +58,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [initial1682605296599],
+    migrations: [initial1682615732678],
   };
 };
 

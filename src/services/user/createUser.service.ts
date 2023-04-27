@@ -5,6 +5,7 @@ import AppError from "../../errors/AppError";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 import { Address } from "../../entities/address";
 import { Repository } from "typeorm";
+import { hashSync } from "bcryptjs";
 
 const createUserService = async (userData: IUserRequest) => {
   const userRep = AppDataSource.getRepository(User);
@@ -15,7 +16,8 @@ const createUserService = async (userData: IUserRequest) => {
     throw new AppError("Email as already registered", 400);
   }
 
-  const { address, ...rest } = userData;
+  const { address, password, ...rest } = userData;
+  const hashedPassword = hashSync(password, 10);
 
   const createaddress: Address = addressRep.create({
     ...address,
@@ -23,6 +25,8 @@ const createUserService = async (userData: IUserRequest) => {
   const saveaddress = await addressRep.save(createaddress);
 
   const createInstanceUser = userRep.create({ ...rest });
+
+  createInstanceUser.password = hashedPassword;
 
   const newUser = await userRep.save({
     ...createInstanceUser,
