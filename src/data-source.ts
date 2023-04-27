@@ -16,7 +16,7 @@ import { editEntityUser1682426992287 } from "./migrations/1682426992287-editEnti
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
-  console.log(dbUrl);
+
   if (!dbUrl) throw new Error("Missing env var: 'DATABASE_URL'");
 
   const nodeEnv: string | undefined = process.env.NODE_ENV;

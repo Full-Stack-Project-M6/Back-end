@@ -1,18 +1,39 @@
+import { hashSync } from "bcryptjs";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user";
-import { IUserResponse, IUserUpdate } from "../../interfaces/user";
+import AppError from "../../errors/AppError";
+import { IUserUpdate } from "../../interfaces/user";
+import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 export const updateUserService = async (
-  body: IUserUpdate,
-  user_id: string
-): Promise<IUserResponse> => {
-  const userRepo = AppDataSource.getRepository(User);
-  const user = await userRepo.findOneBy({ id: user_id });
+  userData: IUserUpdate,
+  idUser: string
+) => {
+  if (!userData) {
+    throw new AppError("Missing Params", 401);
+  }
 
-  const updateUser = await userRepo.save({
-    ...user,
-    ...body,
+  const userRepository = AppDataSource.getRepository(User);
+  const especificUser = await userRepository.findOneBy({ id: idUser });
+
+  if (!especificUser) {
+    throw new AppError("user not found", 404);
+  }
+
+  if (userData?.password) {
+    userData.password = hashSync(userData.password, 10);
+  }
+
+  const newObj = {
+    ...especificUser,
+    ...userData,
+  };
+
+  await userRepository.save(newObj);
+
+  const validatedUser = await userWithoutPasswordSerializer.validate(newObj, {
+    stripUnknown: true,
   });
 
-  return updateUser;
+  return validatedUser;
 };

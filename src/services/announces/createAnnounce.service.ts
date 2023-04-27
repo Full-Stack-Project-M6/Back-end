@@ -14,8 +14,9 @@ import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
 import { User } from "../../entities/user";
-import { IUserCreate, IUserResponse } from "../../interfaces/user";
+import { IUserReturn, IUserResponse } from "../../interfaces/user";
 import AppError from "../../errors/AppError";
+import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 const createAnnounceService = async (
   body: IAnnounceRequest,
@@ -24,7 +25,7 @@ const createAnnounceService = async (
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
 
-  const userRepository: Repository<User> = AppDataSource.getRepository(User);
+  const userRepository = AppDataSource.getRepository(User);
 
   const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
 
@@ -38,78 +39,79 @@ const createAnnounceService = async (
 
   const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
 
-  const { brand, fuel, color, year, model, images, ...rest } =
-    body;
+  const { brand, fuel, color, year, model, images, ...rest } = body;
 
-  const getUser: IUserCreate = await userRepository.findOneBy({
+  const getUser: IUserReturn = await userRepository.findOneBy({
     id: user_id,
   });
-   
+
   let getBrand: IBrandResponce = await brandRepository.findOneBy({
     brand: brand,
   });
-   
-  if(!getBrand){
+
+  if (!getBrand) {
     const newBrand: Brand = brandRepository.create({
       brand,
     });
-     await brandRepository.save(newBrand);
-     getBrand = newBrand
+    await brandRepository.save(newBrand);
+    getBrand = newBrand;
   }
+
+  const userWithoutPassword = await userWithoutPasswordSerializer.validate(
+    getUser,
+    {
+      stripUnknown: true,
+    }
+  );
 
   let getFuel: IFuelResponce = await fuelRepository.findOneBy({
     fuel: fuel,
   });
-   
-  if(!getFuel){
+
+  if (!getFuel) {
     const newFuel: Fuel = fuelRepository.create({
       fuel,
     });
-     await fuelRepository.save(newFuel);
-     getFuel = newFuel
+    await fuelRepository.save(newFuel);
+    getFuel = newFuel;
   }
- 
-
 
   let getColor: IColorResponce = await colorRepository.findOneBy({
     color: color,
   });
 
-  if(!getColor){
+  if (!getColor) {
     const newColor: Color = colorRepository.create({
       color,
     });
-     await colorRepository.save(newColor);
-     getColor = newColor
+    await colorRepository.save(newColor);
+    getColor = newColor;
   }
-
-
 
   let getYear: IYearResponce = await yearRepository.findOneBy({
     year: year,
   });
-   
-  if(!getYear){
+
+  if (!getYear) {
     const newYear: Year = yearRepository.create({
       year,
     });
-     await yearRepository.save(newYear);
-     getYear = newYear
+    await yearRepository.save(newYear);
+    getYear = newYear;
   }
 
   let getModel: IModelResponce = await modelRepository.findOneBy({
     model: model,
   });
 
-  if(!getModel){
+  if (!getModel) {
     const newModel: Model = modelRepository.create({
       model,
     });
-     await modelRepository.save(newModel);
-     getModel = newModel
+    await modelRepository.save(newModel);
+    getModel = newModel;
   }
 
-  
   const createImage: Image = imageRepository.create({
     ...images,
   });
@@ -118,7 +120,7 @@ const createAnnounceService = async (
 
   const createInstanceAnnounce = announceRepository.create({ ...rest });
 
-  const newAnnounce: any = announceRepository.save({
+  const newAnnounce: any = await announceRepository.save({
     ...createInstanceAnnounce,
     brand: getBrand,
     fuel: getFuel,
@@ -126,10 +128,9 @@ const createAnnounceService = async (
     year: getYear,
     model: getModel,
     image: saveImage,
-    user: getUser,
+    user: userWithoutPassword,
   });
 
   return newAnnounce;
 };
-
 export default createAnnounceService;

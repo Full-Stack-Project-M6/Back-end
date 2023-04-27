@@ -4,14 +4,22 @@ import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
 
 const listEspecificAnnounceService = async (announceId: string) => {
-  const announceRepository: Repository<Announce> =
-    AppDataSource.getRepository(Announce);
+  const announceRepository = AppDataSource.getRepository(Announce);
 
-  const listAnnounce: IAnnounceResponce = await announceRepository.findOne({
+  const listAnnounce = await announceRepository.findOne({
     where: { id: announceId },
-    // relations:{user:true}
+    relations: {
+      user: true,
+      brand: true,
+      color: true,
+      fuel: true,
+      image: true,
+      model: true,
+      year: true,
+    },
   });
 
+  delete listAnnounce.user.password;
   return listAnnounce;
 };
 

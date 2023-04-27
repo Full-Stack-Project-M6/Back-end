@@ -58,7 +58,7 @@ class User {
   @OneToMany(() => Comment, (comment) => comment.user)
   comments: Comment[];
 
-  @OneToMany(() => Announce, (announce) => announce.user, { eager: true })
+  @OneToMany(() => Announce, (announce) => announce.user)
   announce: Announce[];
 
   @BeforeInsert()

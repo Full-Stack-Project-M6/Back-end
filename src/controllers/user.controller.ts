@@ -15,7 +15,7 @@ export const createUserController = async (req: Request, res: Response) => {
 export const loginController = async (req: Request, res: Response) => {
   const sessionData: IUserLogin = req.body;
   const token = await loginService(sessionData);
-  return res.status(200).json(token);
+  return res.status(200).json({ token });
 };
 
 export const retrieveEspecificUserController = async (
