@@ -28,7 +28,6 @@ export const retrieveAllAnnouncesService = async (): Promise<Announce[]> => {
       "year",
     ])
     .getMany();
-  console.log(AnnounceRepository);
 
   return AnnounceRepository;
 };

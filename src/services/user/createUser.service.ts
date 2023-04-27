@@ -21,7 +21,6 @@ const createUserService = async (userData: IUserRequest) => {
   const createAdress: Adress = adressRep.create({
     ...adress,
   });
-  console.log(createAdress);
   const saveAdress = await adressRep.save(createAdress);
 
   const createInstanceUser = userRep.create({ ...rest });
