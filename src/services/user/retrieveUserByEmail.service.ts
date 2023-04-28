@@ -17,5 +17,6 @@ export const retrieveUserByEmailService = async (email: string) => {
       stripUnknown: true,
     }
   );
+  
   return validatedUser;
 }

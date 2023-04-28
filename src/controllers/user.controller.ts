@@ -35,6 +35,7 @@ export const retrieveUserByEmailController = async (
 ) => {
   const userEmail = req.params.email;
   const user = await retrieveUserByEmailService(userEmail);
+  
   return res.status(200).json(user);
 };
 
