@@ -34,5 +34,5 @@ export const loginService = async (userData: IUserLogin) => {
       expiresIn: "24h",
     }
   );
-  return token;
+  return { token: token, userId: user.id };
 };
