@@ -3,20 +3,20 @@ import { User } from "../../entities/user";
 import AppError from "../../errors/AppError";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
-export const retrieveEspecificUserService = async (idUser: string) => {
+export const retrieveUserByEmailService = async (email: string) => {
   const userRepository = AppDataSource.getRepository(User);
-  const especificUser = await userRepository.findOneBy({ id: idUser });
 
-  if (!especificUser) {
+  const findUser = await userRepository.findOneBy({ email: email });
+
+  if (!findUser) {
     throw new AppError("user not found", 404);
   }
-  
   const validatedUser = await userWithoutPasswordSerializer.validate(
-    especificUser,
+    findUser,
     {
       stripUnknown: true,
     }
   );
-
+  
   return validatedUser;
-};
+}

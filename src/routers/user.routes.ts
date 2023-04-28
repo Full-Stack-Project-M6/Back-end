@@ -4,7 +4,9 @@ import {
   createUserController,
   deleteUserController,
   retrieveEspecificUserController,
+  retrieveUserByEmailController,
   updateUserController,
+  updateUserPasswordController,
 } from "../controllers/user.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import { authIdMiddleware } from "../middleware/authId.middleware";
@@ -24,11 +26,21 @@ userRoutes.get(
   retrieveEspecificUserController
 );
 
+userRoutes.get(
+  "/recover_user/:email",
+  retrieveUserByEmailController
+);
+
 userRoutes.patch(
   "/:id",
   inspectTokenMiddlewares,
   authIdMiddleware,
   updateUserController
+);
+
+userRoutes.patch(
+  "/recover_password/:id",
+  updateUserPasswordController
 );
 
 userRoutes.delete(
