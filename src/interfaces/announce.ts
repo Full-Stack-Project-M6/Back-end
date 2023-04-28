@@ -1,9 +1,9 @@
-import { IBrandResponce } from "./brand";
-import { IColorResponce } from "./color";
-import { IFuelResponce } from "./fuel";
-import { IModelResponce } from "./model";
+import { IBrandResponce, IBrandUpdate } from "./brand";
+import { IColorResponce, IColorUpdate } from "./color";
+import { IFuelResponce, IFuelUpdate } from "./fuel";
+import { IModelResponce, IModelUpdate } from "./model";
 import { IUserResponseWithoutPassword } from "./user";
-import { IYearResponce } from "./year";
+import { IYearResponce, IYearUpdate } from "./year";
 
 export interface IImagemRequest {
   image1?: string;
@@ -17,6 +17,13 @@ export interface IImagemResponse {
   image2?: string;
   image3?: string;
 }
+
+export interface IImagemUpdate {
+  image1: string;
+  image2: string;
+  image3: string;
+}
+
 
 export interface IAnnounceRequest {
   kilometer: string;
@@ -36,13 +43,20 @@ export interface IAnnounceRequest {
 }
 
 export interface IAnnounceUpdate {
-  kilometer: string;
-  price_FIPE: string;
-  price: string;
-  description: string;
-  image_cover: string;
-  published: boolean;
+  kilometer?: string;
+  price_FIPE?: string;
+  price?: string;
+  description?: string;
+  image_cover?: string;
+  published?: boolean;
+  brand?: string;
+  fuel?: string;
+  color?: string;
+  year?: string;
+  model?: string;
+  images?: IImagemUpdate;
 }
+
 
 export interface IAnnounceCreateResponce {
   id: string;

@@ -8,5 +8,6 @@ export interface IBrandResponce {
 }
 
 export interface IBrandUpdate {
+  
   brand: string;
 }
