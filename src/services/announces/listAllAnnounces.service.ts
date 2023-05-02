@@ -30,6 +30,13 @@ export const retrieveAnnouncesService = async (
       email: true,
       announce: {
         id: true,
+        kilometer: true,
+        price: true,
+        price_FIPE: true,
+        description: true,
+        image_cover: true,
+        published: true,
+        tag: true,
         brand: {
           id: true,
           brand: true,
