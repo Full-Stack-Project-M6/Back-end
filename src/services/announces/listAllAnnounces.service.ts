@@ -19,6 +19,7 @@ export const retrieveAnnouncesService = async (
       "announce.fuel",
       "announce.image",
       "announce.model",
+      "announce.year",
       "announce.user",
     ],
     loadEagerRelations: true,
