@@ -23,7 +23,7 @@ const deleteAnnounceController = async (req: Request, res: Response) => {
 };
 
 const updateAnnounceController = async (req: Request, res: Response) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   const announce = await updateAnnounceService(req.body, req.params.id);
   return res.json(announce);
 };
