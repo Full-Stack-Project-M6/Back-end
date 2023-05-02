@@ -51,6 +51,10 @@ export const retrieveAnnouncesService = async (
           id: true,
           model: true,
         },
+        year: {
+          id: true,
+          year: true,
+        },
         user: {
           id: true,
           name: true,
