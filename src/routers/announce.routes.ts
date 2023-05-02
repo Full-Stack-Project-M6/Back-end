@@ -14,10 +14,12 @@ import {
 } from "../controllers/Announce.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
+import { createCommentController } from "../controllers/comment.controller";
 
 const announceRoutes: Router = Router();
 
 announceRoutes.post("", inspectTokenMiddlewares, createAnnounceController);
+
 announceRoutes.get(
   "/:id",
   inspectTokenMiddlewares,
@@ -39,6 +41,7 @@ announceRoutes.post("/color", createColorController);
 announceRoutes.post("/fuel", createFuelController);
 announceRoutes.post("/model", createModalController);
 announceRoutes.post("/year", createYearController);
+announceRoutes.post("/comment/:id", createCommentController);
 
 announceRoutes.patch(
   "/:id",
