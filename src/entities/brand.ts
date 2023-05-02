@@ -19,7 +19,7 @@ import { Announce } from "./announce";
    @Column({ length: 50,})
     brand: string;
    
-   @OneToMany(() => Announce, (announces) => announces.brand)
+   @OneToMany(() => Announce, (announces) => announces.brand,{eager:true})
     announce: Announce[];
 
     }
