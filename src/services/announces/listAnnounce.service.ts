@@ -1,8 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
-import { IAnnounceResponce } from "../../interfaces/announce";
-import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 import { omit } from "lodash";
 
 const listEspecificAnnounceService = async (announceId: string) => {
@@ -15,7 +12,6 @@ const listEspecificAnnounceService = async (announceId: string) => {
       brand: true,
       color: true,
       fuel: true,
-      image: true,
       model: true,
       year: true,
       comments: true,

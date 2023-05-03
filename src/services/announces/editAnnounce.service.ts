@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
-import { IAnnounceResponce, IAnnounceUpdate, IImagemResponse } from "../../interfaces/announce";
+import { IAnnounceResponce, IAnnounceUpdate } from "../../interfaces/announce";
 import { announceSerializer } from "../../serializers/announce.serializer";
 import { Brand } from "../../entities/brand";
 import { IBrandResponce } from "../../interfaces/brand";
@@ -9,7 +9,6 @@ import { Color } from "../../entities/color";
 import { Fuel } from "../../entities/fuel";
 import { Model } from "../../entities/model";
 import { Year } from "../../entities/year";
-import { Image } from "../../entities/images";
 import { IColorResponce } from "../../interfaces/color";
 import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
@@ -21,35 +20,30 @@ const updateAnnounceService = async (
 ): Promise<IAnnounceResponce> => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
-  
-    const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
 
-    const fuelRepository: Repository<Fuel> = AppDataSource.getRepository(Fuel);
-  
-    const colorRepository: Repository<Color> = AppDataSource.getRepository(Color);
-  
-    const yearRepository: Repository<Year> = AppDataSource.getRepository(Year);
-  
-    const modelRepository: Repository<Model> = AppDataSource.getRepository(Model);
-  
-    const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
-  
-    const { brand, fuel, color, year, model, images, ...rest } = announceData;
-     
-    
+  const brandRepository: Repository<Brand> = AppDataSource.getRepository(Brand);
+
+  const fuelRepository: Repository<Fuel> = AppDataSource.getRepository(Fuel);
+
+  const colorRepository: Repository<Color> = AppDataSource.getRepository(Color);
+
+  const yearRepository: Repository<Year> = AppDataSource.getRepository(Year);
+
+  const modelRepository: Repository<Model> = AppDataSource.getRepository(Model);
+
+  const { brand, fuel, color, year, model, ...rest } = announceData;
+
   const announceFind: IAnnounceResponce = await announceRepository.findOne({
-    where: {id: announceId},
-    relations:{
-      brand:true,
-      color:true,
-      fuel:true,
-      year:true,
-      model:true,
-      image:true
-      
-    }
+    where: { id: announceId },
+    relations: {
+      brand: true,
+      color: true,
+      fuel: true,
+      year: true,
+      model: true,
+    },
   });
-  
+
   let getBrand: IBrandResponce = await brandRepository.findOneBy({
     brand: brand,
   });
@@ -110,39 +104,21 @@ const updateAnnounceService = async (
     getModel = newModel;
   }
 
-  let getImages: IImagemResponse = await imageRepository.findOneBy({
-    id:announceFind.image.id ,
-  });
-
-    
-     
-   const updateImages =  await imageRepository.save({
-      ...getImages,
-      ...images
-    });
-  
-
-
-
-  
-
-
- 
-  const updateAnnounce = await announceRepository.save( { ...announceFind , 
+  const updateAnnounce = await announceRepository.save({
+    ...announceFind,
     brand: getBrand,
     fuel: getFuel,
     color: getColor,
     year: getYear,
     model: getModel,
-    image: getImages, ...rest} )
-  
-    
-  console.log(updateAnnounce)
+    ...rest,
+  });
 
-  const validateAnnounce = await announceSerializer.validate(updateAnnounce,{
+  console.log(updateAnnounce);
+
+  const validateAnnounce = await announceSerializer.validate(updateAnnounce, {
     stripUnknown: true,
-  })
-
+  });
 
   return await validateAnnounce;
 };

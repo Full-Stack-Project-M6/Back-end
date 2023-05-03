@@ -1,9 +1,4 @@
 import * as yup from "yup";
-import {
-  IAnnounceCreateResponce,
-  IAnnounceResponce,
-} from "../interfaces/announce";
-import { IBrandResponce } from "../interfaces/brand";
 
 export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
   id: yup.string().required(),
@@ -14,6 +9,7 @@ export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
   image_cover: yup.string().required(),
   published: yup.boolean().required(),
   tag: yup.boolean().required(),
+  images: yup.array().required(),
   brand: yup.object().shape({
     id: yup.string().required(),
     brand: yup.string().required(),
@@ -41,12 +37,6 @@ export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
       createdAt: yup.date().required(),
     })
   ),
-  image: yup.object().shape({
-    image1: yup.string().notRequired(),
-    image2: yup.string().notRequired(),
-    image3: yup.string().notRequired(),
-    id: yup.string().required(),
-  }),
 });
 
 export const announceCreateSerializer: yup.ObjectSchema<any> = yup
@@ -60,6 +50,7 @@ export const announceCreateSerializer: yup.ObjectSchema<any> = yup
     image_cover: yup.string().required(),
     published: yup.boolean().required(),
     tag: yup.boolean().required(),
+    images: yup.array().required(),
     brand: yup.object().shape({
       id: yup.string().required(),
       brand: yup.string().required(),
@@ -87,12 +78,6 @@ export const announceCreateSerializer: yup.ObjectSchema<any> = yup
         createdAt: yup.date().required(),
       })
     ),
-    image: yup.object().shape({
-      image1: yup.string().notRequired(),
-      image2: yup.string().notRequired(),
-      image3: yup.string().notRequired(),
-      id: yup.string().required(),
-    }),
     user: yup.object().shape({
       id: yup.string().required(),
       name: yup.string().required(),

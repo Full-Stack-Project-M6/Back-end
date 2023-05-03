@@ -1,9 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { Announce } from "../../entities/announce";
-import { IAnnounceResponce } from "../../interfaces/announce";
 import { User } from "../../entities/user";
-import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 export const retrieveAnnouncesService = async (
   userId: string
@@ -17,7 +13,6 @@ export const retrieveAnnouncesService = async (
       "announce.brand",
       "announce.color",
       "announce.fuel",
-      "announce.image",
       "announce.model",
       "announce.comments",
       "announce.year",
@@ -38,6 +33,7 @@ export const retrieveAnnouncesService = async (
         image_cover: true,
         published: true,
         tag: true,
+        images: true,
         brand: {
           id: true,
           brand: true,
@@ -49,12 +45,6 @@ export const retrieveAnnouncesService = async (
         fuel: {
           id: true,
           fuel: true,
-        },
-        image: {
-          id: true,
-          image1: true,
-          image2: true,
-          image3: true,
         },
         model: {
           id: true,
