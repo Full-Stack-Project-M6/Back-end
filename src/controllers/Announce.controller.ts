@@ -7,7 +7,6 @@ import createColorService from "../services/color/createColor.service";
 import createFuelService from "../services/fuel/createFuel.service";
 import createModelService from "../services/model/createModel.service";
 import createYearService from "../services/year/createYear.service";
-import createImageService from "../services/images/createImages.service";
 import listEspecificAnnounceService from "../services/announces/listAnnounce.service";
 import retrieveAnnouncesService from "../services/announces/listAllAnnounces.service";
 import retrieveAllAnnouncesService from "../services/announces/listAllUsersAnnounce.service";
@@ -68,11 +67,6 @@ const createYearController = async (req: Request, res: Response) => {
   return res.status(201).json(announce);
 };
 
-const createImageController = async (req: Request, res: Response) => {
-  const announce = await createImageService(req.body);
-  return res.status(201).json(announce);
-};
-
 export {
   createAnnounceController,
   deleteAnnounceController,
@@ -82,7 +76,6 @@ export {
   createFuelController,
   createModalController,
   createYearController,
-  createImageController,
   listEspecificAnnounceController,
   listAnnounceALLController,
   listAllUsersAnnoncesController,

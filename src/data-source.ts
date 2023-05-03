@@ -1,18 +1,16 @@
 import "dotenv/config";
 import "reflect-metadata";
-import path from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { Address } from "./entities/address";
 import { Announce } from "./entities/announce";
 import { Brand } from "./entities/brand";
 import { Color } from "./entities/color";
 import { Fuel } from "./entities/fuel";
-import { Image } from "./entities/images";
 import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { Initial1683053495798 } from "./migrations/1683053495798-Initial";
+import { initial1683122703127 } from "./migrations/1683122703127-initial";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -33,7 +31,6 @@ const dataSourceConfig = (): DataSourceOptions => {
         Color,
         Comment,
         Fuel,
-        Image,
         Model,
         User,
         Year,
@@ -53,12 +50,11 @@ const dataSourceConfig = (): DataSourceOptions => {
       Color,
       Comment,
       Fuel,
-      Image,
       Model,
       User,
       Year,
     ],
-    migrations: [Initial1683053495798],
+    migrations: [initial1683122703127],
   };
 };
 
