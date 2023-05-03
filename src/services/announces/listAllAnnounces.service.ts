@@ -20,6 +20,7 @@ export const retrieveAnnouncesService = async (
       "announce.image",
       "announce.model",
       "announce.comments",
+      "announce.year",
       "announce.user",
     ],
     loadEagerRelations: true,
