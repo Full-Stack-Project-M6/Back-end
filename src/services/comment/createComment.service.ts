@@ -2,9 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { ICommentRequest, ICommentResponse } from "../../interfaces/comment";
 import { Comment } from "../../entities/comment";
-import { User } from "../../entities/user";
 import { Announce } from "../../entities/announce";
-import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 export const createCommentService = async (
   body: ICommentRequest,
@@ -42,12 +40,6 @@ export const createCommentService = async (
       fuel: {
         id: true,
         fuel: true,
-      },
-      image: {
-        id: true,
-        image1: true,
-        image2: true,
-        image3: true,
       },
       model: {
         id: true,

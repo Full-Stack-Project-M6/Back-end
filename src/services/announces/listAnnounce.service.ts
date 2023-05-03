@@ -1,7 +1,5 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
-import { IAnnounceResponce } from "../../interfaces/announce";
 
 const listEspecificAnnounceService = async (announceId: string) => {
   const announceRepository = AppDataSource.getRepository(Announce);
@@ -13,7 +11,6 @@ const listEspecificAnnounceService = async (announceId: string) => {
       brand: true,
       color: true,
       fuel: true,
-      image: true,
       model: true,
       year: true,
       comments: true,

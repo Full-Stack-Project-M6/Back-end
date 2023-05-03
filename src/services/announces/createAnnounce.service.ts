@@ -1,7 +1,6 @@
 import { Repository } from "typeorm";
-import { IAnnounceRequest, IImagemRequest } from "../../interfaces/announce";
+import { IAnnounceRequest } from "../../interfaces/announce";
 import { Announce } from "../../entities/announce";
-import { Image } from "../../entities/images";
 import { AppDataSource } from "../../data-source";
 import { Brand } from "../../entities/brand";
 import { Fuel } from "../../entities/fuel";
@@ -14,8 +13,6 @@ import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
 import { User } from "../../entities/user";
-import { IUserReturn, IUserResponse } from "../../interfaces/user";
-import AppError from "../../errors/AppError";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 
 const createAnnounceService = async (
@@ -37,9 +34,7 @@ const createAnnounceService = async (
 
   const modelRepository: Repository<Model> = AppDataSource.getRepository(Model);
 
-  const imageRepository: Repository<Image> = AppDataSource.getRepository(Image);
-
-  const { brand, fuel, color, year, model, images, ...rest } = body;
+  const { brand, fuel, color, year, model, ...rest } = body;
 
   const getUser = await userRepository.findOneBy({
     id: user_id,
@@ -112,12 +107,6 @@ const createAnnounceService = async (
     getModel = newModel;
   }
 
-  const createImage: Image = imageRepository.create({
-    ...images,
-  });
-
-  const saveImage = await imageRepository.save(createImage);
-
   const createInstanceAnnounce = announceRepository.create({ ...rest });
 
   const newAnnounce: any = await announceRepository.save({
@@ -127,7 +116,6 @@ const createAnnounceService = async (
     color: getColor,
     year: getYear,
     model: getModel,
-    image: saveImage,
     user: userWithoutPassword,
   });
 

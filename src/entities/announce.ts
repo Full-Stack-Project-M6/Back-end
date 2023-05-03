@@ -2,13 +2,8 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
   ManyToOne,
-  JoinTable,
   OneToMany,
-  ManyToMany,
-  OneToOne,
-  JoinColumn,
 } from "typeorm";
 import { User } from "./user";
 import { Comment } from "./comment";
@@ -16,9 +11,7 @@ import { Brand } from "./brand";
 import { Color } from "./color";
 import { Fuel } from "./fuel";
 import { Year } from "./year";
-import { Image } from "./images";
 import { Model } from "./model";
-import { join } from "path";
 
 @Entity("announces")
 class Announce {
@@ -29,7 +22,6 @@ class Announce {
   comments: Comment[];
 
   @ManyToOne(() => User, (user) => user.announce, {
-    // eager: true,
     cascade: true,
     onDelete: "CASCADE",
   })
@@ -86,9 +78,8 @@ class Announce {
   @Column({ default: false })
   tag: boolean;
 
-  @OneToOne(() => Image, (image) => image.announce)
-  @JoinColumn()
-  image: Image;
+  @Column("text", { array: true })
+  images: string[];
 }
 
 export { Announce };

@@ -1,18 +1,14 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
-import { IAnnounceResponce } from "../../interfaces/announce";
 
-const deleteAnonnouceService = async (announceId: string): Promise<void> => {
+const deleteAnonnouceService = async (announceId: string) => {
   const announceRepository: Repository<Announce> =
     AppDataSource.getRepository(Announce);
 
-  const deletedAnnounce: IAnnounceResponce = await announceRepository.findOneBy(
-    {
-      id: announceId,
-    }
-  );
-
+  const deletedAnnounce: any = await announceRepository.findOneBy({
+    id: announceId,
+  });
 
   await announceRepository.delete(deletedAnnounce);
 };
