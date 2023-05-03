@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class initial1682639260598 implements MigrationInterface {
-    name = 'initial1682639260598'
+export class Initial1683053495798 implements MigrationInterface {
+    name = 'Initial1683053495798'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "brands" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "brand" character varying(50) NOT NULL, CONSTRAINT "PK_b0c437120b624da1034a81fc561" PRIMARY KEY ("id"))`);
@@ -11,7 +11,7 @@ export class initial1682639260598 implements MigrationInterface {
         await queryRunner.query(`CREATE TABLE "images" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "image1" character varying NOT NULL, "image2" character varying NOT NULL, "image3" character varying NOT NULL, CONSTRAINT "PK_1fe148074c6a1a91b63cb9ee3c9" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "model" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "model" character varying(50) NOT NULL, CONSTRAINT "PK_d6df271bba301d5cc79462912a4" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "announces" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "kilometer" character varying(50) NOT NULL, "price_FIPE" character varying(50) NOT NULL, "price" character varying(50) NOT NULL, "description" character varying(50) NOT NULL, "image_cover" character varying NOT NULL, "published" boolean NOT NULL DEFAULT true, "tag" boolean NOT NULL DEFAULT false, "userId" uuid, "brandId" uuid, "colorId" uuid, "yearId" uuid, "modelId" uuid, "fuelId" uuid, "imageId" uuid, CONSTRAINT "REL_8d1f89f22698c85df1fc2da054" UNIQUE ("imageId"), CONSTRAINT "PK_9d7389225221375f560773aa115" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "comments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "comment" character varying(200) NOT NULL, "userId" uuid, "announceId" uuid, CONSTRAINT "PK_8bf68bc960f2b69e818bdb90dcb" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "comments" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "comment" character varying(200) NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "userId" uuid, "announceId" uuid, CONSTRAINT "PK_8bf68bc960f2b69e818bdb90dcb" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "users" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying(50) NOT NULL, "email" character varying(50) NOT NULL, "cpf" character varying(14) NOT NULL, "cellphone" character varying(15) NOT NULL, "date_birth" character varying(10) NOT NULL, "description" character varying(100) NOT NULL, "account_type" boolean NOT NULL DEFAULT false, "password" character varying(120) NOT NULL, "isActive" boolean DEFAULT true, "deletedAt" TIMESTAMP, "addressId" uuid, CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), CONSTRAINT "UQ_230b925048540454c8b4c481e1c" UNIQUE ("cpf"), CONSTRAINT "UQ_15f2ebe082a6e43a960f9f88411" UNIQUE ("cellphone"), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "address" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "cep" character varying(50) NOT NULL, "estate" character varying(50) NOT NULL, "city" character varying(50) NOT NULL, "street" character varying(50) NOT NULL, "number" character varying(50) NOT NULL, "complement" character varying(50) NOT NULL, CONSTRAINT "PK_d92de1f82754668b5f5f5dd4fd5" PRIMARY KEY ("id"))`);
         await queryRunner.query(`ALTER TABLE "announces" ADD CONSTRAINT "FK_967f35a377367271b6f9ffc47c6" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);

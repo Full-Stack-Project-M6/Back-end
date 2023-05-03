@@ -19,6 +19,7 @@ export const retrieveAnnouncesService = async (
       "announce.fuel",
       "announce.image",
       "announce.model",
+      "announce.comments",
       "announce.year",
       "announce.user",
     ],
@@ -62,6 +63,11 @@ export const retrieveAnnouncesService = async (
         year: {
           id: true,
           year: true,
+        },
+        comments: {
+          id: true,
+          comment: true,
+          createdAt: true,
         },
         user: {
           id: true,

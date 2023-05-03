@@ -13,6 +13,7 @@ export const retrieveAllAnnouncesService = async (): Promise<Announce[]> => {
     .leftJoinAndSelect("announce.image", "image")
     .leftJoinAndSelect("announce.model", "model")
     .leftJoinAndSelect("announce.year", "year")
+    .leftJoinAndSelect("announce.comments", "comments")
     .select([
       "announce",
       "announce.color",
@@ -26,6 +27,7 @@ export const retrieveAllAnnouncesService = async (): Promise<Announce[]> => {
       "image",
       "model",
       "year",
+      "comments",
     ])
     .getMany();
 

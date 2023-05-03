@@ -34,6 +34,13 @@ export const announceSerializer: yup.ObjectSchema<any> = yup.object().shape({
     id: yup.string().required(),
     model: yup.string().required(),
   }),
+  comments: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required(),
+      comment: yup.string().required(),
+      createdAt: yup.date().required(),
+    })
+  ),
   image: yup.object().shape({
     image1: yup.string().notRequired(),
     image2: yup.string().notRequired(),
@@ -73,6 +80,13 @@ export const announceCreateSerializer: yup.ObjectSchema<any> = yup
       id: yup.string().required(),
       model: yup.string().required(),
     }),
+    comments: yup.array().of(
+      yup.object().shape({
+        id: yup.string().required(),
+        comment: yup.string().required(),
+        createdAt: yup.date().required(),
+      })
+    ),
     image: yup.object().shape({
       image1: yup.string().notRequired(),
       image2: yup.string().notRequired(),

@@ -16,6 +16,7 @@ const listEspecificAnnounceService = async (announceId: string) => {
       image: true,
       model: true,
       year: true,
+      comments: true,
     },
   });
 

@@ -1,5 +1,6 @@
 import { IBrandResponce, IBrandUpdate } from "./brand";
 import { IColorResponce, IColorUpdate } from "./color";
+import { ICommentRequest, ICommentResponse } from "./comment";
 import { IFuelResponce, IFuelUpdate } from "./fuel";
 import { IModelResponce, IModelUpdate } from "./model";
 import { IUserResponseWithoutPassword } from "./user";
@@ -23,7 +24,6 @@ export interface IImagemUpdate {
   image2: string;
   image3: string;
 }
-
 
 export interface IAnnounceRequest {
   kilometer: string;
@@ -56,7 +56,6 @@ export interface IAnnounceUpdate {
   model?: string;
   images?: IImagemUpdate;
 }
-
 
 export interface IAnnounceCreateResponce {
   id: string;
@@ -91,4 +90,5 @@ export interface IAnnounceResponce {
   year: IYearResponce;
   model: IModelResponce;
   image: IImagemResponse;
+  comments: ICommentResponse[];
 }
