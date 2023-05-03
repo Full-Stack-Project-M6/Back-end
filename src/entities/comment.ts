@@ -21,6 +21,7 @@ class Comment {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.comments, {
+    eager: true,
     cascade: true,
     onDelete: "CASCADE",
   })

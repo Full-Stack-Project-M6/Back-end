@@ -2,6 +2,8 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
 import { IAnnounceResponce } from "../../interfaces/announce";
+import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
+import { omit } from "lodash";
 
 const listEspecificAnnounceService = async (announceId: string) => {
   const announceRepository = AppDataSource.getRepository(Announce);
@@ -18,10 +20,30 @@ const listEspecificAnnounceService = async (announceId: string) => {
       year: true,
       comments: true,
     },
+    loadEagerRelations: true,
+    select: {
+      comments: {
+        id: true,
+        comment: true,
+        createdAt: true,
+        user: { id: true, name: true },
+      },
+    },
   });
 
-  delete listAnnounce.user.password;
-  return listAnnounce;
+  const commentsWithoutUserPassword = listAnnounce.comments.map((comment) => {
+    const userWithoutPassword = omit(comment.user, "password");
+    return { ...comment, user: userWithoutPassword };
+  });
+
+  const userWithoutPassword = omit(listAnnounce.user, "password");
+  const announceWithoutUserPassword = {
+    ...listAnnounce,
+    user: userWithoutPassword,
+    comments: commentsWithoutUserPassword,
+  };
+
+  return announceWithoutUserPassword;
 };
 
 export default listEspecificAnnounceService;
