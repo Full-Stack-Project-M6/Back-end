@@ -10,7 +10,7 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { initial1683122703127 } from "./migrations/1683122703127-initial";
+import path from "path";
 
 const dataSourceConfig = (): DataSourceOptions => {
   const dbUrl: string | undefined = process.env.DATABASE_URL;
@@ -54,7 +54,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [initial1683122703127],
+    migrations: [path.join(__dirname, "./migrations/**.{js,ts}")]
   };
 };
 

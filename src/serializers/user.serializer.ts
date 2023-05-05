@@ -21,6 +21,7 @@ export const userSerializer: yup.ObjectSchema<any> = yup.object().shape({
     )
     .required("Data de nascimento é obrigatória"),
   description: yup.string().required(),
+  reset_token: yup.string().notRequired(),
   account_type: yup.boolean().required(),
   password: yup.string().required(),
   address: yup.object().shape({
@@ -41,6 +42,7 @@ export const userWithoutPasswordSerializer: yup.ObjectSchema<any> = yup
     email: yup.string().email().required(),
     cpf: yup.string().required(),
     cellphone: yup.string().required(),
+    reset_token: yup.string().notRequired(),
     date_birth: yup.string().required(),
     description: yup.string().required(),
     account_type: yup.boolean().required(),
