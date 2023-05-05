@@ -1,29 +1,10 @@
-import { IBrandResponce, IBrandUpdate } from "./brand";
-import { IColorResponce, IColorUpdate } from "./color";
-import { IFuelResponce, IFuelUpdate } from "./fuel";
-import { IModelResponce, IModelUpdate } from "./model";
+import { IBrandResponce } from "./brand";
+import { IColorResponce } from "./color";
+import { ICommentResponse } from "./comment";
+import { IFuelResponce } from "./fuel";
+import { IModelResponce } from "./model";
 import { IUserResponseWithoutPassword } from "./user";
-import { IYearResponce, IYearUpdate } from "./year";
-
-export interface IImagemRequest {
-  image1?: string;
-  image2?: string;
-  image3?: string;
-}
-
-export interface IImagemResponse {
-  id: string;
-  image1?: string;
-  image2?: string;
-  image3?: string;
-}
-
-export interface IImagemUpdate {
-  image1: string;
-  image2: string;
-  image3: string;
-}
-
+import { IYearResponce } from "./year";
 
 export interface IAnnounceRequest {
   kilometer: string;
@@ -38,7 +19,7 @@ export interface IAnnounceRequest {
   color: string;
   fuel: string;
   year: string;
-  images?: IImagemRequest;
+  images?: string[];
   user_id: string;
 }
 
@@ -54,9 +35,8 @@ export interface IAnnounceUpdate {
   color?: string;
   year?: string;
   model?: string;
-  images?: IImagemUpdate;
+  images?: string[];
 }
-
 
 export interface IAnnounceCreateResponce {
   id: string;
@@ -72,7 +52,7 @@ export interface IAnnounceCreateResponce {
   color: IColorResponce;
   year: IYearResponce;
   model: IModelResponce;
-  image: IImagemResponse;
+  images: string[];
   user: IUserResponseWithoutPassword;
 }
 
@@ -90,5 +70,6 @@ export interface IAnnounceResponce {
   color: IColorResponce;
   year: IYearResponce;
   model: IModelResponce;
-  image: IImagemResponse;
+  images: string[];
+  comments: ICommentResponse[];
 }
