@@ -20,7 +20,7 @@ export const createCommentService = async (
   const getUser = await userRepository.findOneBy({
     id: user_id,
   });
-  console.log(getUser);
+
   const userWithoutPassword = await userWithoutPasswordSerializer.validate(
     getUser,
     {
