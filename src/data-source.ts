@@ -12,7 +12,7 @@ import { Model } from "./entities/model";
 import { User } from "./entities/user";
 import { Year } from "./entities/year";
 import { Comment } from "./entities/comment";
-import { initial1682639260598 } from "./migrations/1682639260598-initial";
+
 
 
 
@@ -61,7 +61,7 @@ const dataSourceConfig = (): DataSourceOptions => {
       User,
       Year,
     ],
-    migrations: [initial1682639260598],
+    migrations: [path.join(__dirname, "./migrations/**.{js,ts}")]
   };
 };
 

@@ -3,10 +3,10 @@ import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 import {
   createUserController,
   deleteUserController,
+  resetPasswordController,
   retrieveEspecificUserController,
-  retrieveUserByEmailController,
+  sendEmailToResetController,
   updateUserController,
-  updateUserPasswordController,
 } from "../controllers/user.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import { authIdMiddleware } from "../middleware/authId.middleware";
@@ -20,15 +20,12 @@ userRoutes.post(
   createUserController
 );
 
+userRoutes.post("/sendReset", sendEmailToResetController)
+
 userRoutes.get(
   "/:id",
   inspectTokenMiddlewares,
   retrieveEspecificUserController
-);
-
-userRoutes.get(
-  "/recover_user/:email",
-  retrieveUserByEmailController
 );
 
 userRoutes.patch(
@@ -39,8 +36,8 @@ userRoutes.patch(
 );
 
 userRoutes.patch(
-  "/recover_password/:id",
-  updateUserPasswordController
+  "/reset_password/:token",
+  resetPasswordController
 );
 
 userRoutes.delete(

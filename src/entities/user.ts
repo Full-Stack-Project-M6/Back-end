@@ -3,12 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  BeforeInsert,
-  BeforeUpdate,
   OneToMany,
-  JoinTable,
-  OneToOne,
   JoinColumn,
   DeleteDateColumn,
   ManyToOne,
@@ -39,6 +34,9 @@ class User {
 
   @Column({ length: 100 })
   description: string;
+
+  @Column({ nullable: true, default: " " })
+  reset_token: string;
 
   @Column({ default: false })
   account_type: boolean;

@@ -55,3 +55,9 @@ export interface IUserResponseWithoutPassword {
   account_type: boolean;
   announce: IAnnounceResponce[];
 }
+
+export interface ISendEmail {
+  to: string;
+  subject: string;
+  text: string;
+}
