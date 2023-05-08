@@ -18,10 +18,10 @@ export interface IaddressResponce {
 }
 
 export interface IaddressUpdate {
-  cep: string;
-  estate: string;
-  city: string;
-  street: string;
-  number: string;
-  complement: string;
+  cep?: string;
+  estate?: string;
+  city?: string;
+  street?: string;
+  number?: string;
+  complement?: string;
 }
