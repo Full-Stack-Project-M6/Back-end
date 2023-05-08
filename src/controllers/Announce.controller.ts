@@ -7,7 +7,7 @@ import createColorService from "../services/color/createColor.service";
 import createFuelService from "../services/fuel/createFuel.service";
 import createModelService from "../services/model/createModel.service";
 import createYearService from "../services/year/createYear.service";
-import listEspecificAnnounceService from "../services/announces/listAnnounce.service";
+import listEspecificAnnounceService from "../services/announces/listEspecificAnnounce.service";
 import retrieveAnnouncesService from "../services/announces/listAllAnnounces.service";
 import retrieveAllAnnouncesService from "../services/announces/listAllUsersAnnounce.service";
 

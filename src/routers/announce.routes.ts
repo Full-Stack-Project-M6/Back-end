@@ -16,7 +16,9 @@ import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 import {
   createCommentController,
+  deleteCommentController,
   listCommentController,
+  updateCommentController,
 } from "../controllers/comment.controller";
 
 const announceRoutes: Router = Router();
@@ -39,6 +41,8 @@ announceRoutes.delete(
   deleteAnnounceController
 );
 
+announceRoutes.patch("/:id", inspectTokenMiddlewares, updateAnnounceController);
+
 announceRoutes.post("/brand", createBrandController);
 announceRoutes.post("/color", createColorController);
 announceRoutes.post("/fuel", createFuelController);
@@ -49,12 +53,9 @@ announceRoutes.post(
   inspectTokenMiddlewares,
   createCommentController
 );
+
 announceRoutes.get("/comment/:id", listCommentController);
+announceRoutes.patch("/comment/:id", updateCommentController);
+announceRoutes.delete("/comment/:id", deleteCommentController);
 
-announceRoutes.patch(
-  "/:id",
-  inspectTokenMiddlewares,
-
-  updateAnnounceController
-);
 export default announceRoutes;

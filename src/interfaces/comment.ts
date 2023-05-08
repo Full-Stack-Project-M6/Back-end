@@ -14,3 +14,7 @@ export interface ICommentResponse {
   user: IUserResponse;
   announce: IAnnounceResponce;
 }
+
+export interface ICommentUpdate {
+  comment?: string;
+}
