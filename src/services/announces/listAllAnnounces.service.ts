@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user";
+import AppError from "../../errors/AppError";
 
 export const retrieveAnnouncesService = async (
   userId: string
@@ -69,6 +70,9 @@ export const retrieveAnnouncesService = async (
       },
     },
   });
+  if (!userAnnounces) {
+    throw new AppError("announce not found", 404);
+  }
   return userAnnounces;
 };
 

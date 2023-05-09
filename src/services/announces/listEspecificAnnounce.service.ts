@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
 import { omit } from "lodash";
+import AppError from "../../errors/AppError";
 
 const listEspecificAnnounceService = async (announceId: string) => {
   const announceRepository = AppDataSource.getRepository(Announce);
@@ -26,6 +27,10 @@ const listEspecificAnnounceService = async (announceId: string) => {
       },
     },
   });
+
+  if (!listAnnounce) {
+    throw new AppError("announce not found", 404);
+  }
 
   const commentsWithoutUserPassword = listAnnounce.comments.map((comment) => {
     const userWithoutPassword = omit(comment.user, "password");

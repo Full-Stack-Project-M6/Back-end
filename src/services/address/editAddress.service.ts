@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address } from "../../entities/address";
 import { IaddressResponce, IaddressUpdate } from "../../interfaces/address";
+import AppError from "../../errors/AppError";
 
 const updateAddressService = async (
   addresData: IaddressUpdate,
@@ -14,6 +15,10 @@ const updateAddressService = async (
     id:addressId,
     
   });
+
+  if (!addressFind) {
+    throw new AppError("address not found", 404);
+  }
 console.log(addressFind)
   
   const adress: Address = await adressRep.save({
