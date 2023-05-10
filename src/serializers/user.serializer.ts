@@ -1,5 +1,3 @@
-import { IaddressResponce } from "../interfaces/address";
-import { IUserRequest, IUserReturn } from "../interfaces/user";
 import * as yup from "yup";
 
 export const userSerializer: yup.ObjectSchema<any> = yup.object().shape({

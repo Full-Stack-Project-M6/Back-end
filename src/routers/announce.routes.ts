@@ -1,17 +1,12 @@
 import { Router } from "express";
 import {
   createAnnounceController,
-  createBrandController,
-  createColorController,
-  createFuelController,
-  createModalController,
-  createYearController,
   deleteAnnounceController,
   listAllUsersAnnoncesController,
   listAnnounceALLController,
-  listEspecificAnnounceController,
+  retrieveEspecificAnnounceController,
   updateAnnounceController,
-} from "../controllers/Announce.controller";
+} from "../controllers/announce.controller";
 import { inspectTokenMiddlewares } from "../middleware/inspectToken";
 import ensureDataIsValidMiddleware from "../middleware/ensureValidatedDate";
 import {
@@ -28,12 +23,14 @@ announceRoutes.post("", inspectTokenMiddlewares, createAnnounceController);
 announceRoutes.get(
   "/:id",
   inspectTokenMiddlewares,
-  listEspecificAnnounceController
+  retrieveEspecificAnnounceController
 );
 
 announceRoutes.get("/all/:user_id", listAnnounceALLController);
 
 announceRoutes.get("", listAllUsersAnnoncesController);
+
+announceRoutes.patch("/:id", inspectTokenMiddlewares, updateAnnounceController);
 
 announceRoutes.delete(
   "/:id",
@@ -41,19 +38,11 @@ announceRoutes.delete(
   deleteAnnounceController
 );
 
-announceRoutes.patch("/:id", inspectTokenMiddlewares, updateAnnounceController);
-
-announceRoutes.post("/brand", createBrandController);
-announceRoutes.post("/color", createColorController);
-announceRoutes.post("/fuel", createFuelController);
-announceRoutes.post("/model", createModalController);
-announceRoutes.post("/year", createYearController);
 announceRoutes.post(
   "/comment/:id",
   inspectTokenMiddlewares,
   createCommentController
 );
-
 announceRoutes.get("/comment/:id", listCommentController);
 announceRoutes.patch("/comment/:id", updateCommentController);
 announceRoutes.delete("/comment/:id", deleteCommentController);

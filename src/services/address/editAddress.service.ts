@@ -8,28 +8,23 @@ const updateAddressService = async (
   addresData: IaddressUpdate,
   addressId: string
 ): Promise<IaddressResponce> => {
-  const adressRep: Repository<Address> =
-    AppDataSource.getRepository(Address);
+  const adressRep: Repository<Address> = AppDataSource.getRepository(Address);
 
   const addressFind: Address = await adressRep.findOneBy({
-    id:addressId,
-    
+    id: addressId,
   });
 
   if (!addressFind) {
     throw new AppError("address not found", 404);
   }
-console.log(addressFind)
-  
+  console.log(addressFind);
+
   const adress: Address = await adressRep.save({
     ...addressFind,
     ...addresData,
-    
   });
-  
-  
 
-  return  adress;
+  return adress;
 };
 
 export default updateAddressService;
