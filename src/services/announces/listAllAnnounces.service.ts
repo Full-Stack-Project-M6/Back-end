@@ -58,6 +58,13 @@ export const retrieveAnnouncesService = async (
           id: true,
           comment: true,
           createdAt: true,
+          user: {
+            id: true,
+            name: true,
+            cellphone: true,
+            email: true,
+            description: true,
+          },
         },
         user: {
           id: true,
@@ -73,59 +80,3 @@ export const retrieveAnnouncesService = async (
 };
 
 export default retrieveAnnouncesService;
-
-//   const userAnnounces = await userRepository.findOne({
-//     select: {
-//       id: true,
-//       name: true,
-//       cellphone: true,
-//       email: true,
-//       announce: true,
-//     },
-//     where: { id: userId },
-//     relations: {
-//       announce: {
-//         brand: true,
-//         color: true,
-//         fuel: true,
-//         image: true,
-//         model: true,
-//         year: true,
-//         user: {
-//           select: {
-//             id: true,
-//             name: true,
-//             cellphone: true,
-//             email: true,
-//           },
-//         },
-//       },
-//     },
-//   });
-
-//   return userAnnounces;
-// };
-
-// export default retrieveAnnouncesService;
-
-// async (user_id: string) => {
-//   const announceRepository = AppDataSource.getRepository(Announce);
-//   console.log(announceRepository);
-//   const listAnnounce = await announceRepository.findOne({
-//     where: { id: user_id },
-//     relations: {
-//       user: true,
-//       brand: true,
-//       color: true,
-//       fuel: true,
-//       image: true,
-//       model: true,
-//       year: true,
-//     },
-//   });
-
-//   delete listAnnounce.user.password;
-//   return listAnnounce;
-// };
-
-// export default retrieveAnnouncesService;

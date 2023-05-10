@@ -18,12 +18,11 @@ export const loginService = async (userData: IUserLogin) => {
   }
 
   const passMatch = await compare(userData.password, user.password);
-  
+
   if (!passMatch) {
     throw new AppError("Email or password invalid", 401);
   }
- 
- 
+
   const token = jwt.sign(
     {
       id: user.id,

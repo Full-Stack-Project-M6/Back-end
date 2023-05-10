@@ -1,5 +1,3 @@
-import { Announce } from "../entities/announce";
-import { User } from "../entities/user";
 import { IAnnounceResponce } from "./announce";
 import { IUserResponse } from "./user";
 

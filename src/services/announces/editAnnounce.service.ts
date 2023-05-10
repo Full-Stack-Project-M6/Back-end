@@ -114,8 +114,6 @@ const updateAnnounceService = async (
     ...rest,
   });
 
-  console.log(updateAnnounce);
-
   const validateAnnounce = await announceSerializer.validate(updateAnnounce, {
     stripUnknown: true,
   });
