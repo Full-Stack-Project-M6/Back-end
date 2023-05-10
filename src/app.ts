@@ -11,8 +11,8 @@ export const app: Application = express();
 app.use(express.json());
 
 app.use(cors());
-app.use(handleError);
 app.use("/announce", announceRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/address", addressRoutes);
+app.use(handleError);
