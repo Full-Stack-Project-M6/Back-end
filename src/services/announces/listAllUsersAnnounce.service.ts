@@ -1,11 +1,12 @@
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
+import { IAnnounceResponceAll } from "../../interfaces/announce";
 
 export const retrieveAllAnnouncesService = async (
   limit: number,
   offset:number,
   currrentUrl: string
-  ): Promise<any> => {
+  ): Promise<IAnnounceResponceAll> => {
 
   limit = Number(limit)
   offset = Number(offset)

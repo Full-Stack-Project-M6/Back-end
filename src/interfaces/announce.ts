@@ -73,3 +73,12 @@ export interface IAnnounceResponce {
   images: string[];
   comments: ICommentResponse[];
 }
+
+export interface IAnnounceResponceAll {
+  nextUrl: string | null;
+  previousUrl: string | null;
+  limit: number;
+  offset: number;
+  total: number,
+  AnnounceRepository: IAnnounceResponce[]
+}
