@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import 'express-async-errors';
 import handleError from "./errors/handleError";
 import announceRoutes from "./routers/announce.routes";
 import cors from "cors";

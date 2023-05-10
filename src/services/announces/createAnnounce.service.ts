@@ -14,6 +14,7 @@ import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
 import { User } from "../../entities/user";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
+import AppError from "../../errors/AppError";
 
 const createAnnounceService = async (
   body: IAnnounceRequest,
@@ -39,6 +40,10 @@ const createAnnounceService = async (
   const getUser = await userRepository.findOneBy({
     id: user_id,
   });
+
+  if (!getUser) {
+    throw new AppError("user not found", 404);
+  }
 
   let getBrand: IBrandResponce = await brandRepository.findOneBy({
     brand: brand,
