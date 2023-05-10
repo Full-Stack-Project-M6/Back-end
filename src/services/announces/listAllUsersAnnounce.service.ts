@@ -1,7 +1,37 @@
 import { AppDataSource } from "../../data-source";
 import { Announce } from "../../entities/announce";
+import { IAnnounceResponceAll } from "../../interfaces/announce";
 
-export const retrieveAllAnnouncesService = async (): Promise<Announce[]> => {
+export const retrieveAllAnnouncesService = async (
+  limit: number,
+  offset:number,
+  currrentUrl: string
+  ): Promise<IAnnounceResponceAll> => {
+
+  limit = Number(limit)
+  offset = Number(offset)
+
+  if(!limit) {
+    limit = 2;
+  };
+
+  if (!offset) {
+    offset = 0;
+  };
+
+  const next = limit + offset
+
+  const countRepository = await AppDataSource
+  .getRepository(Announce)
+  .createQueryBuilder("announce")
+  .getCount()
+
+  const nextUrl = next < countRepository ? `${currrentUrl}?limit=${limit}&offset=${next}` : null;
+
+  const previous = offset - limit < 0 ? null : offset - limit;
+
+  const previousUrl = previous != null ? `${currrentUrl}?limit=${limit}&offset=${previous}` : null;
+
   const AnnounceRepository = await AppDataSource.getRepository(Announce)
     .createQueryBuilder("announce")
     .leftJoinAndSelect("announce.user", "user")
@@ -26,9 +56,18 @@ export const retrieveAllAnnouncesService = async (): Promise<Announce[]> => {
       "year",
       "comments",
     ])
+    .skip(offset)
+    .take(limit)
     .getMany();
 
-  return AnnounceRepository;
+  return {
+    nextUrl,
+    previousUrl,
+    limit,
+    offset,
+    total: countRepository,
+    AnnounceRepository
+  };
 };
 
 export default retrieveAllAnnouncesService;
