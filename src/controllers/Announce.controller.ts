@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, Locals } from "express";
 import createAnnounceService from "../services/announces/createAnnounce.service";
 import deleteAnonnouceService from "../services/announces/deleteAnnounce.service";
 import updateAnnounceService from "../services/announces/editAnnounce.service";
@@ -25,7 +25,14 @@ const listAnnounceALLController = async (req: Request, res: Response) => {
 };
 
 const listAllUsersAnnoncesController = async (req: Request, res: Response) => {
-  const listAnnounce = await retrieveAllAnnouncesService();
+
+  const {limit, offset} = req.query;
+  const currrentUrl = req.baseUrl;
+
+  let NumberItems = Number(limit)
+  let NumberPage = Number(offset)
+
+  const listAnnounce = await retrieveAllAnnouncesService(NumberItems, NumberPage, currrentUrl);
   return res.status(200).json(listAnnounce);
 };
 

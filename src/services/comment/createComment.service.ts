@@ -6,6 +6,7 @@ import { Announce } from "../../entities/announce";
 import { userWithoutPasswordSerializer } from "../../serializers/user.serializer";
 import { IAnnounceResponce } from "../../interfaces/announce";
 import { User } from "../../entities/user";
+import AppError from "../../errors/AppError";
 
 export const createCommentService = async (
   body: ICommentRequest,
@@ -74,6 +75,10 @@ export const createCommentService = async (
       },
     },
   });
+
+  if (!announce) {
+    throw new AppError("announce not found", 404);
+  }
 
   const createComment: Comment = commentRepository.create({
     ...body,

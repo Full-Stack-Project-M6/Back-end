@@ -13,6 +13,7 @@ import { IColorResponce } from "../../interfaces/color";
 import { IFuelResponce } from "../../interfaces/fuel";
 import { IModelResponce } from "../../interfaces/model";
 import { IYearResponce } from "../../interfaces/year";
+import AppError from "../../errors/AppError";
 
 const updateAnnounceService = async (
   announceData: IAnnounceUpdate,
@@ -43,6 +44,11 @@ const updateAnnounceService = async (
       model: true,
     },
   });
+
+  if (!announceFind) {
+    throw new AppError("announce not found", 404);
+  }
+
 
   let getBrand: IBrandResponce = await brandRepository.findOneBy({
     brand: brand,
