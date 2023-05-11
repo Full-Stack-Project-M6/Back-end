@@ -1,10 +1,10 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user";
 import AppError from "../../errors/AppError";
+import { omit } from "lodash";
+import { announceCreateSerializer } from "../../serializers/announce.serializer";
 
-export const retrieveAnnouncesService = async (
-  userId: string
-): Promise<any> => {
+export const listAllAnnouncesService = async (userId: string): Promise<any> => {
   const userRepository = AppDataSource.getRepository(User);
 
   const userAnnounces = await userRepository.findOne({
@@ -59,13 +59,7 @@ export const retrieveAnnouncesService = async (
           id: true,
           comment: true,
           createdAt: true,
-          user: {
-            id: true,
-            name: true,
-            cellphone: true,
-            email: true,
-            description: true,
-          },
+          user: { id: true, name: true },
         },
         user: {
           id: true,
@@ -80,7 +74,8 @@ export const retrieveAnnouncesService = async (
   if (!userAnnounces) {
     throw new AppError("announce not found", 404);
   }
+
   return userAnnounces;
 };
 
-export default retrieveAnnouncesService;
+export default listAllAnnouncesService;

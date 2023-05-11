@@ -3,7 +3,7 @@ import { Announce } from "../../entities/announce";
 import { omit } from "lodash";
 import AppError from "../../errors/AppError";
 
-const listEspecificAnnounceService = async (announceId: string) => {
+const retrieveEspecificAnnounceService = async (announceId: string) => {
   const announceRepository = AppDataSource.getRepository(Announce);
 
   const listAnnounce = await announceRepository.findOne({
@@ -47,4 +47,4 @@ const listEspecificAnnounceService = async (announceId: string) => {
   return announceWithoutUserPassword;
 };
 
-export default listEspecificAnnounceService;
+export default retrieveEspecificAnnounceService;
