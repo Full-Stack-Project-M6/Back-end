@@ -66,7 +66,7 @@ class Announce {
   @Column({ length: 50 })
   price: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 300 })
   description: string;
 
   @Column()
