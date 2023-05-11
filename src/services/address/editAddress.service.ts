@@ -17,7 +17,6 @@ const updateAddressService = async (
   if (!addressFind) {
     throw new AppError("address not found", 404);
   }
-  console.log(addressFind);
 
   const adress: Address = await adressRep.save({
     ...addressFind,

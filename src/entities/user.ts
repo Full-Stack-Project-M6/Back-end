@@ -32,7 +32,7 @@ class User {
   @Column({ length: 10, nullable: false })
   date_birth: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 200 })
   description: string;
 
   @Column({ nullable: true, default: " " })
